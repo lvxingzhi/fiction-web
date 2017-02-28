@@ -1,0 +1,21 @@
+build/
+_Store
+.idea
+#ignore iml
+*.iml
+#ignore eclipse file
+.project
+*.class
+.classpath
+*.class
+.settings/
+classes/
+.loadpath
+#gitignore bak file
+*.bak
+target/
+overlays/
+*.war
+*.class
+.log
+/bin/
