@@ -13,16 +13,24 @@
                                                 src="/resources/image/finction-head.jpg"></a>
                                     </div>
                                     <div class="col-md-8">
-                                        <h1>${fictionInfo.title} <small>${fictionInfo.authorName}</small></h1>
+                                        <h1>${fictionInfo.title}
+                                            <small>${fictionInfo.authorName}</small>
+                                        </h1>
                                         <blockquote class="height15">
                                             <p>简介: </p>
                                             <p>${fictionInfo.fullDesc}</p>
                                         </blockquote>
-                                        <a href="/homepage/contentPage"><button type="button" class="btn btn-danger btn-lg">在线阅读</button></a>
+                                        <a href="/homepage/contentPage">
+                                            <button type="button" class="btn btn-danger btn-lg">在线阅读</button>
+                                        </a>
                                         <ul class="nav navbar-nav navbar-right">
-                                            <li><button type="button" class="btn btn-success">评分</button></li>
+                                            <li>
+                                                <button type="button" class="btn btn-success">评分</button>
+                                            </li>
                                             <li>&nbsp;</li>
-                                            <li><button type="button" class="btn btn-warning">分享</button></li>
+                                            <li>
+                                                <button type="button" class="btn btn-warning">分享</button>
+                                            </li>
                                         </ul>
                                     </div>
                                 </div>
@@ -35,9 +43,25 @@
                 <sidebar class="col-md-3">
                     <div class="">
                         <h4 class="title">网络评分</h4>
-                        <h1 class="text-center" >${(fictionInfo.fictionScore/fictionInfo.fictionScoreNum)?string("0.0")}<small>分</small></h1>
+                        <h1 class="text-center">${(fictionInfo.fictionScore/fictionInfo.fictionScoreNum)?string("0.0")}
+                            <small>分</small>
+                        </h1>
                     </div>
                 </sidebar>
+            </div>
+        </div>
+    </div>
+    <div class="row ">
+        <div class="panel ">
+            <div class="panel-heading title"><h3>作品目录</h3></div>
+            <div class="panel-body">
+                <#if chapterList??>
+                    <#list chapterList as item>
+                        <div class="col-md-4">
+                            <p class="text-center">${item.chapterName}</p>
+                        </div>
+                    </#list>
+                </#if>
             </div>
         </div>
     </div>

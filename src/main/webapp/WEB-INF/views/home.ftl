@@ -10,12 +10,17 @@
                             <div class="row " id="hotTableContent">
                             <#if fullList??>
                                 <#list fullList as item>
-                                    <div class="col-md-3 thumbnail">
-                                        <a href="/homepage/infoPage?fictionCode=${item.logicCode}"><img src="/resources/image/1.jpg"/></a>
-                                        <p>${item.title}</p>
-                                        <p>${item.authorName}</p>
-                                        <p>${item.shortDesc}</p>
-                                        <p>${item.createTime?string("yyyy-MM-dd HH:mm:ss")}</p>
+                                    <div class="col-md-3 ">
+                                        <a class="thumbnail"
+                                           href="/homepage/infoPage?fictionCode=${item.logicCode}"><img
+                                                src="/resources/image/1.jpg"/>
+                                            <div class="caption">
+                                                <p>${item.title}</p>
+                                                <p>${item.authorName}</p>
+                                                <p>${item.shortDesc}</p>
+                                                <p>${item.createTime?string("yyyy-MM-dd HH:mm:ss")}</p>
+                                            </div>
+                                        </a>
                                     </div>
                                 </#list>
                             </#if>
@@ -29,12 +34,17 @@
                             <#if fullList??>
                                 <#list fullList as item>
 
-                                    <div class="col-md-3 thumbnail">
-                                        <a href="/homepage/infoPage?fictionCode=${item.logicCode}"><img src="/resources/image/1.jpg"/></a>
-                                        <p>${item.title}</p>
-                                        <p>${item.authorName}</p>
-                                        <p>${item.shortDesc}</p>
-                                        <p>${item.createTime?string("yyyy-MM-dd HH:mm:ss")}</p>
+                                    <div class="col-md-3 ">
+                                        <a class="thumbnail"
+                                           href="/homepage/infoPage?fictionCode=${item.logicCode}"><img
+                                                src="/resources/image/1.jpg"/>
+                                            <div class="caption">
+                                                <p>${item.title}</p>
+                                                <p>${item.authorName}</p>
+                                                <p>${item.shortDesc}</p>
+                                                <p>${item.createTime?string("yyyy-MM-dd HH:mm:ss")}</p>
+                                            </div>
+                                        </a>
                                     </div>
                                 </#list>
                             </#if>

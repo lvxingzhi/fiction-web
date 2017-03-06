@@ -4,10 +4,12 @@ import com.google.gson.reflect.TypeToken;
 import com.note.base.enums.FictionRankTypeEnum;
 import com.note.provider.fiction.api.FictionApiService;
 import com.note.provider.fiction.dto.request.FictionChapterInfoReq;
+import com.note.provider.fiction.dto.request.FictionChapterReq;
 import com.note.provider.fiction.dto.request.FictionFindOneReq;
 import com.note.provider.fiction.dto.request.FictionRankSearchReq;
 import com.note.provider.fiction.dto.request.FictionSearchReq;
 import com.note.provider.fiction.dto.response.FictionChapterInfoResp;
+import com.note.provider.fiction.dto.response.FictionChapterResp;
 import com.note.provider.fiction.dto.response.FictionFindOneResp;
 import com.note.provider.fiction.dto.response.FictionRankSearchResp;
 import com.note.provider.fiction.dto.response.FictionSearchResp;
@@ -89,7 +91,12 @@ public class HomePageAction {
         fictionFindOneReq.setFictionCode(fictionCode);
         String infoJson= fictionApiService.findFictionInfo(gson.toJson(fictionFindOneReq));
         FictionFindOneResp fictionFindOneResp = gson.fromJson(infoJson,new TypeToken<FictionFindOneResp>(){}.getType());
+        FictionChapterReq fictionChapterReq = new FictionChapterReq();
+        fictionChapterReq.setFictionCode(fictionCode);
+        String chapterListJson= fictionApiService.findFictionChapters(gson.toJson(fictionChapterReq));
+        List<FictionChapterResp> chapterList = gson.fromJson(chapterListJson,new TypeToken<List<FictionChapterResp>>(){}.getType());
         model.addAttribute("fictionInfo",fictionFindOneResp);
+        model.addAttribute("chapterList",chapterList);
         return "infoPage";
     }
 
