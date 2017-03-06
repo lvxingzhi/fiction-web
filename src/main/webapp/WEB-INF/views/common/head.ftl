@@ -184,22 +184,28 @@
             background-color: #ebebeb;
         }
 
+        .searchImg{
+            width:120px;
+            height: 150px;;
+        }
+
     </style>
 </head>
 <#include "/common/config.ftl"/>
 <body class="background1">
+<base target='_blank'>
 <header class="navbar-static-top navbar-fixed-top navbar-inverse">
     <div class="container">
         <div class="navbar-header">
             <a style="font-family:楷体_GB2312;font-size: x-large;font-weight: bolder;" class="navbar-brand"
-               href="#">江湖故事</a>
+               href="/">江湖故事</a>
         </div>
         <nav class="collapse navbar-collapse">
             <form class="navbar-form navbar-left">
                 <div class="form-group">
                     <input type="text" class="form-control" placeholder="输入一本书名">
                 </div>
-                <button type="button" class="btn btn-default" onclick="search()">搜索</button>
+                <a  href="/homepage/search"><button type="button" class="btn btn-default" >搜索</button></a>
             </form>
             <ul class="nav navbar-nav navbar-right">
                 <li><a target="_blank" href="">登录</a></li>

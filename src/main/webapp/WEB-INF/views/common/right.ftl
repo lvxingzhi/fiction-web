@@ -2,17 +2,21 @@
     <div class="widget">
         <h4 class="title">江湖阅读榜</h4>
         <ol>
-        <#list viewsList as item>
-            <li><a>[书名] ${item.title}</a></li>
-        </#list>
+        <#if viewsList??>
+            <#list viewsList as item>
+                <li><a href="/homepage/infoPage?fictionCode=${item.fictionCode}">[${item.typeName}] ${item.fictionName}</a></li>
+            </#list>
+        </#if>
         </ol>
     </div>
     <div class="widget">
-        <h4 class="title">江湖新秀</h4>
+        <h4 class="title">江湖评分榜</h4>
         <ol>
-        <#list newList as item>
-            <li><a>[书名] ${item.title}</a></li>
-        </#list>
+        <#if rankList??>
+            <#list rankList as item>
+                <li><a href="/homepage/infoPage?fictionCode=${item.fictionCode}">[${item.typeName}] ${item.fictionName}</a></li>
+            </#list>
+        </#if>
         </ol>
     </div>
     <div class="widget">

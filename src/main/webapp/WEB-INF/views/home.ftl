@@ -8,15 +8,17 @@
                         <h3 class="title">人气连载</h3>
                         <div class="panel-body">
                             <div class="row " id="hotTableContent">
-                            <#list hotList as item>
-                                <div class="col-md-3 thumbnail">
-                                    <img src="/resources/image/1.jpg"/>
-                                    <p>${item.title}</p>
-                                    <p>${item.authorName}</p>
-                                    <p>${item.description}</p>
-                                    <p>${item.createTime?string("yyyy-MM-dd HH:mm:ss")}</p>
-                                </div>
-                            </#list>
+                            <#if fullList??>
+                                <#list fullList as item>
+                                    <div class="col-md-3 thumbnail">
+                                        <a href="/homepage/infoPage?fictionCode=${item.logicCode}"><img src="/resources/image/1.jpg"/></a>
+                                        <p>${item.title}</p>
+                                        <p>${item.authorName}</p>
+                                        <p>${item.shortDesc}</p>
+                                        <p>${item.createTime?string("yyyy-MM-dd HH:mm:ss")}</p>
+                                    </div>
+                                </#list>
+                            </#if>
                             </div>
                         </div>
                     </div>
@@ -24,17 +26,18 @@
                         <h3 class="title">全站精品</h3>
                         <div class="panel-body">
                             <div class="row ">
+                            <#if fullList??>
+                                <#list fullList as item>
 
-                            <#list list as item>
-                                <div class="col-md-3 thumbnail">
-                                    <img src="/resources/image/1.jpg"/>
-                                    <p>${item.title}</p>
-                                    <p>${item.authorName}</p>
-                                    <p>${item.description}</p>
-                                    <p>${item.createTime?string("yyyy-MM-dd HH:mm:ss")}</p>
-                                </div>
-                            </#list>
-
+                                    <div class="col-md-3 thumbnail">
+                                        <a href="/homepage/infoPage?fictionCode=${item.logicCode}"><img src="/resources/image/1.jpg"/></a>
+                                        <p>${item.title}</p>
+                                        <p>${item.authorName}</p>
+                                        <p>${item.shortDesc}</p>
+                                        <p>${item.createTime?string("yyyy-MM-dd HH:mm:ss")}</p>
+                                    </div>
+                                </#list>
+                            </#if>
                             </div>
                         </div>
                     </div>
