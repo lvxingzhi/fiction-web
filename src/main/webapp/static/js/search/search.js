@@ -15,9 +15,9 @@ function search() {
                 var array = data.list;
                 var listContent = "";
                 array.forEach(function(item){
-                    listContent+='<li class="list-group-item"><span class="badge"><a  href="/homepage/infoPage">点击阅读</a></span>' +
+                    listContent+='<li class="list-group-item"><span class="badge searchRead-color"><a  href="/homepage/infoPage?fictionCode='+item.logicCode+'">点击阅读</a></span>' +
                         '<div class="row"><div class="col-md-2">' +
-                        '<a href="//book.qidian.com/info/131957" target="_blank">' +
+                        '<a href="/homepage/infoPage?fictionCode='+item.logicCode+'" target="_blank">' +
                         '<img class="searchImg" src="'+item.coverPhoto+'"></a>' +
                         '</div><div class="col-md-7"><h4>'+item.title+' <small>'+item.authorName+'</small>' +
                         '</h4><blockquote><em>'+item.fullDesc+'</em>' +

@@ -2,6 +2,7 @@ package com.note.fictionweb.action;
 
 import com.google.gson.reflect.TypeToken;
 import com.note.base.enums.FictionRankTypeEnum;
+import com.note.base.utils.ObjectUtil;
 import com.note.provider.fiction.api.FictionApiService;
 import com.note.provider.fiction.dto.request.FictionChapterInfoReq;
 import com.note.provider.fiction.dto.request.FictionChapterReq;
@@ -70,7 +71,7 @@ public class HomePageAction {
     }
 
     @RequestMapping("/search")
-    public String search(Model model) throws IOException, SQLException {
+    public String search(Model model,String headContent) throws IOException, SQLException {
 
         FictionRankSearchReq fictionRankSearchReq = new FictionRankSearchReq();
         fictionRankSearchReq.setRankType(FictionRankTypeEnum.VIEW.getType());
@@ -82,6 +83,7 @@ public class HomePageAction {
         List<FictionRankSearchResp> scoreList = gson.fromJson(scoreJson,new TypeToken<List<FictionRankSearchResp>>(){}.getType());
         model.addAttribute("viewsList",viewsList);
         model.addAttribute("scoreList",scoreList);
+        model.addAttribute("headContent", ObjectUtil.isNull(headContent)?"":headContent);
         return "search";
     }
 

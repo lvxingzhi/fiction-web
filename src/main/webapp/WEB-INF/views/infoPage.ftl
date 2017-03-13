@@ -58,7 +58,7 @@
                 <#if chapterList??>
                     <#list chapterList as item>
                         <div class="col-md-4">
-                            <p class="text-center">${item.chapterName}</p>
+                            <p class="text-center "><a class="pointer-style" onclick="showChapterInfo('${item.logicCode}');">${item.chapterName}</a></p>
                         </div>
                     </#list>
                 </#if>
@@ -71,4 +71,5 @@
 <script src="/resources/plugin/bootstrap/js/bootstrap.js"></script>
 <#--<script src="/resources/plugin/bootstrap/js/npm.js"></script>-->
 <script src="/resources/js/home/home.js"></script>
+<script src="/resources/js/infopage/infoPage.js"></script>
 </html>

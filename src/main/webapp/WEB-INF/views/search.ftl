@@ -18,8 +18,8 @@
                                 </ul>
 
                                 <div class="input-group" style="margin-bottom: 30px;margin-top: 20px;">
-                                    <input type="text" class="form-control" id="searchContent">
-                                    <span class="input-group-addon" onclick="search();">搜索</span>
+                                    <input type="text" class="form-control" id="searchContent" value="${headContent}">
+                                    <span class="input-group-addon pointer-style" onclick="search();" >搜索</span>
                                 </div>
 
                                 <ul class="list-group" id="listContent">

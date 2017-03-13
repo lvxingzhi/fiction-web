@@ -189,9 +189,20 @@
             height: 150px;;
         }
 
+        .searchRead-color{
+            background-color: #31b0d5;
+            font-size: 15px;
+        }
+
+        .pointer-style{
+            cursor:pointer;
+        }
+
+
     </style>
 </head>
 <#include "/common/config.ftl"/>
+<script src="/resources/js/head/head.js"></script>
 <body class="background1">
 <base target='_blank'>
 <header class="navbar-static-top navbar-fixed-top navbar-inverse">
@@ -203,9 +214,9 @@
         <nav class="collapse navbar-collapse">
             <form class="navbar-form navbar-left">
                 <div class="form-group">
-                    <input type="text" class="form-control" placeholder="输入一本书名">
+                    <input type="text" class="form-control" placeholder="输入一本书名" id="headContent">
                 </div>
-                <a  href="/homepage/search"><button type="button" class="btn btn-default" >搜索</button></a>
+                <a  href="/homepage/search" onclick="javascript:homeSearch();"><button type="button" class="btn btn-default" >搜索</button></a>
             </form>
             <ul class="nav navbar-nav navbar-right">
                 <li><a target="_blank" href="">登录</a></li>
