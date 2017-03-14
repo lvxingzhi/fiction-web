@@ -1,6 +1,7 @@
 package com.note.fictionweb.action;
 
 import com.google.gson.reflect.TypeToken;
+import com.note.base.dto.PageDto;
 import com.note.base.enums.FictionRankTypeEnum;
 import com.note.base.utils.ObjectUtil;
 import com.note.provider.fiction.api.FictionApiService;
@@ -42,14 +43,17 @@ public class HomePageAction {
         FictionSearchReq fictionSearchReq = new FictionSearchReq();
         fictionSearchReq.setOrderBy("create_time");
         fictionSearchReq.setOrderByType("desc");
+        fictionSearchReq.setSize(12);
         String fullJson = fictionApiService.findFull(gson.toJson(fictionSearchReq));
         List<FictionSearchResp> fullList = gson.fromJson(fullJson,new TypeToken<List<FictionSearchResp>>(){}.getType());
         FictionRankSearchReq fictionRankSearchReq = new FictionRankSearchReq();
         fictionRankSearchReq.setRankType(FictionRankTypeEnum.VIEW.getType());
+        fictionRankSearchReq.setSize(12);
         String viewsJson = fictionApiService.findRankList(gson.toJson(fictionRankSearchReq));
         List<FictionRankSearchResp> viewsList = gson.fromJson(viewsJson,new TypeToken<List<FictionRankSearchResp>>(){}.getType());
         FictionRankSearchReq fictionRankSearchReq2 = new FictionRankSearchReq();
         fictionRankSearchReq2.setRankType(FictionRankTypeEnum.SCORE.getType());
+        fictionRankSearchReq2.setSize(12);
         String scoreJson = fictionApiService.findRankList(gson.toJson(fictionRankSearchReq2));
         List<FictionRankSearchResp> scoreList = gson.fromJson(scoreJson,new TypeToken<List<FictionRankSearchResp>>(){}.getType());
         model.addAttribute("fullList",fullList);
@@ -63,6 +67,7 @@ public class HomePageAction {
     public String ajaxSearch(String searchContent,Model model) throws IOException, SQLException {
         FictionSearchReq fictionSearchReq = new FictionSearchReq();
         fictionSearchReq.setTitle(searchContent);
+        fictionSearchReq.setSize(12); //TODO
         String json = fictionApiService.findFull(gson.toJson(fictionSearchReq));
         List<FictionSearchResp> list = gson.fromJson(json,new TypeToken<List<FictionSearchResp>>(){}.getType());
         HashMap<String,Object> resultMap = new HashMap<>();
@@ -75,10 +80,12 @@ public class HomePageAction {
 
         FictionRankSearchReq fictionRankSearchReq = new FictionRankSearchReq();
         fictionRankSearchReq.setRankType(FictionRankTypeEnum.VIEW.getType());
+        fictionRankSearchReq.setSize(12);
         String viewsJson = fictionApiService.findRankList(gson.toJson(fictionRankSearchReq));
         List<FictionRankSearchResp> viewsList = gson.fromJson(viewsJson,new TypeToken<List<FictionRankSearchResp>>(){}.getType());
         FictionRankSearchReq fictionRankSearchReq2 = new FictionRankSearchReq();
         fictionRankSearchReq2.setRankType(FictionRankTypeEnum.SCORE.getType());
+        fictionRankSearchReq2.setSize(12);
         String scoreJson = fictionApiService.findRankList(gson.toJson(fictionRankSearchReq2));
         List<FictionRankSearchResp> scoreList = gson.fromJson(scoreJson,new TypeToken<List<FictionRankSearchResp>>(){}.getType());
         model.addAttribute("viewsList",viewsList);
@@ -95,6 +102,7 @@ public class HomePageAction {
         FictionFindOneResp fictionFindOneResp = gson.fromJson(infoJson,new TypeToken<FictionFindOneResp>(){}.getType());
         FictionChapterReq fictionChapterReq = new FictionChapterReq();
         fictionChapterReq.setFictionCode(fictionCode);
+        fictionChapterReq.setSize(PageDto.MAX);
         String chapterListJson= fictionApiService.findFictionChapters(gson.toJson(fictionChapterReq));
         List<FictionChapterResp> chapterList = gson.fromJson(chapterListJson,new TypeToken<List<FictionChapterResp>>(){}.getType());
         model.addAttribute("fictionInfo",fictionFindOneResp);
