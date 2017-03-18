@@ -18,6 +18,13 @@ public class IndexAction {
     @Resource(name="fictionApiService")
     private FictionApiService fictionApiService;
 
+    /**
+     * 跳转到主页
+     * @param model
+     * @return
+     * @throws IOException
+     * @throws SQLException
+     */
     @RequestMapping("/")
     public String index(Model model) throws IOException, SQLException {
         return "redirect:/homepage/home";

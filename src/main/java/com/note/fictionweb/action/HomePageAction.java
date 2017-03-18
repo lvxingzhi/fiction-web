@@ -38,6 +38,13 @@ public class HomePageAction {
     @Resource(name="fictionApiService")
     private FictionApiService fictionApiService;
 
+    /**
+     * 主页
+     * @param model
+     * @return
+     * @throws IOException
+     * @throws SQLException
+     */
     @RequestMapping("/home")
     public String index(Model model) throws IOException, SQLException {
         FictionSearchReq fictionSearchReq = new FictionSearchReq();
@@ -48,12 +55,12 @@ public class HomePageAction {
         List<FictionSearchResp> fullList = gson.fromJson(fullJson,new TypeToken<List<FictionSearchResp>>(){}.getType());
         FictionRankSearchReq fictionRankSearchReq = new FictionRankSearchReq();
         fictionRankSearchReq.setRankType(FictionRankTypeEnum.VIEW.getType());
-        fictionRankSearchReq.setSize(12);
+        fictionRankSearchReq.setSize(10);
         String viewsJson = fictionApiService.findRankList(gson.toJson(fictionRankSearchReq));
         List<FictionRankSearchResp> viewsList = gson.fromJson(viewsJson,new TypeToken<List<FictionRankSearchResp>>(){}.getType());
         FictionRankSearchReq fictionRankSearchReq2 = new FictionRankSearchReq();
         fictionRankSearchReq2.setRankType(FictionRankTypeEnum.SCORE.getType());
-        fictionRankSearchReq2.setSize(12);
+        fictionRankSearchReq2.setSize(10);
         String scoreJson = fictionApiService.findRankList(gson.toJson(fictionRankSearchReq2));
         List<FictionRankSearchResp> scoreList = gson.fromJson(scoreJson,new TypeToken<List<FictionRankSearchResp>>(){}.getType());
         model.addAttribute("fullList",fullList);
@@ -62,12 +69,20 @@ public class HomePageAction {
         return "home";
     }
 
+    /**
+     * ajax搜索
+     * @param searchContent
+     * @param model
+     * @return
+     * @throws IOException
+     * @throws SQLException
+     */
     @RequestMapping(value="/ajaxSearch", produces = "text/html;charset=UTF-8")
     @ResponseBody
     public String ajaxSearch(String searchContent,Model model) throws IOException, SQLException {
         FictionSearchReq fictionSearchReq = new FictionSearchReq();
         fictionSearchReq.setTitle(searchContent);
-        fictionSearchReq.setSize(12); //TODO
+        fictionSearchReq.setSize(10); //TODO
         String json = fictionApiService.findFull(gson.toJson(fictionSearchReq));
         List<FictionSearchResp> list = gson.fromJson(json,new TypeToken<List<FictionSearchResp>>(){}.getType());
         HashMap<String,Object> resultMap = new HashMap<>();
@@ -75,17 +90,25 @@ public class HomePageAction {
         return gson.toJson(resultMap);
     }
 
+    /**
+     * 搜索页
+     * @param model
+     * @param headContent
+     * @return
+     * @throws IOException
+     * @throws SQLException
+     */
     @RequestMapping("/search")
     public String search(Model model,String headContent) throws IOException, SQLException {
 
         FictionRankSearchReq fictionRankSearchReq = new FictionRankSearchReq();
         fictionRankSearchReq.setRankType(FictionRankTypeEnum.VIEW.getType());
-        fictionRankSearchReq.setSize(12);
+        fictionRankSearchReq.setSize(10);
         String viewsJson = fictionApiService.findRankList(gson.toJson(fictionRankSearchReq));
         List<FictionRankSearchResp> viewsList = gson.fromJson(viewsJson,new TypeToken<List<FictionRankSearchResp>>(){}.getType());
         FictionRankSearchReq fictionRankSearchReq2 = new FictionRankSearchReq();
         fictionRankSearchReq2.setRankType(FictionRankTypeEnum.SCORE.getType());
-        fictionRankSearchReq2.setSize(12);
+        fictionRankSearchReq2.setSize(10);
         String scoreJson = fictionApiService.findRankList(gson.toJson(fictionRankSearchReq2));
         List<FictionRankSearchResp> scoreList = gson.fromJson(scoreJson,new TypeToken<List<FictionRankSearchResp>>(){}.getType());
         model.addAttribute("viewsList",viewsList);
@@ -94,6 +117,14 @@ public class HomePageAction {
         return "search";
     }
 
+    /**
+     * 小说详情页
+     * @param fictionCode
+     * @param model
+     * @return
+     * @throws IOException
+     * @throws SQLException
+     */
     @RequestMapping("/infoPage")
     public String infoPage(String fictionCode,Model model) throws IOException, SQLException {
         FictionFindOneReq fictionFindOneReq = new FictionFindOneReq();
@@ -110,6 +141,14 @@ public class HomePageAction {
         return "infoPage";
     }
 
+    /**
+     * 章节详情页
+     * @param chapterCode
+     * @param model
+     * @return
+     * @throws IOException
+     * @throws SQLException
+     */
     @RequestMapping("/contentPage")
     public String contentPage(String chapterCode,Model model) throws IOException, SQLException {
         chapterCode="uuuuuuuuuuu1";
