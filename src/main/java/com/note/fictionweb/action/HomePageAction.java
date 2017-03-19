@@ -29,7 +29,7 @@ import java.util.List;
 import static com.note.base.utils.JsonUtil.gson;
 
 /**
- * Created by Administrator on 2017/2/12.
+ * 主页
  */
 @Controller
 @RequestMapping("homepage")
@@ -82,7 +82,7 @@ public class HomePageAction {
     public String ajaxSearch(String searchContent,Model model) throws IOException, SQLException {
         FictionSearchReq fictionSearchReq = new FictionSearchReq();
         fictionSearchReq.setTitle(searchContent);
-        fictionSearchReq.setSize(10); //TODO
+        fictionSearchReq.setSize(5);
         String json = fictionApiService.findFull(gson.toJson(fictionSearchReq));
         List<FictionSearchResp> list = gson.fromJson(json,new TypeToken<List<FictionSearchResp>>(){}.getType());
         HashMap<String,Object> resultMap = new HashMap<>();

@@ -216,11 +216,11 @@
                 <div class="form-group">
                     <input type="text" class="form-control" placeholder="输入一本书名" id="headContent">
                 </div>
-                <a  href="/homepage/search" onclick="javascript:homeSearch();"><button type="button" class="btn btn-default" >搜索</button></a>
+                <a  onclick="javascript:homeSearch();"><button type="button" class="btn btn-default" >搜索</button></a>
             </form>
             <ul class="nav navbar-nav navbar-right">
-                <li><a target="_blank" href="">登录</a></li>
-                <li><a target="_blank" href="">注册</a></li>
+                <li><a target="_blank"  onclick="showModalLogin();">登录</a></li>
+                <li><a target="_blank"  onclick="showModalRegist();">注册</a></li>
             </ul>
         </nav>
     </div>
@@ -288,3 +288,70 @@
         </ul>
     </div>
 </div>
+
+<!--注册模态框-->
+<div class="modal fade" tabindex="-1" role="dialog" id="registWindow">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">欢迎加入</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-bottom contact-form">
+                    <form method="post"  role="form">
+                        <div class="form-group">
+                            <label for="contact-email" >用户名</label>
+                            <input type="text" id="userName" class="form-control" placeholder="用户名..." name="username">
+                        </div>
+                        <div class="form-group">
+                            <label for="contact-subject" >密码</label>
+                            <input type="text" id="password" class=" form-control" placeholder="密码..." name="password">
+                        </div>
+                        <div class="form-group">
+                            <label for="contact-message" >邮箱</label>
+                            <input id="email" class=" form-control" placeholder="邮箱..." name="email">
+                        </div>
+                        <div class="form-group">
+                            <label for="contact-message" >昵称</label>
+                            <input id="name" class=" form-control" placeholder="昵称..." name="name">
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <#--<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>-->
+                <button type="button" class="btn btn-primary" onclick="regist();">确定</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<!--登录模态框-->
+<div class="modal fade" tabindex="-1" role="dialog" id="loginWindow">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">欢迎回来</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-bottom contact-form">
+                    <form method="post"  role="form">
+                        <div class="form-group">
+                            <label for="contact-email" >用户名</label>
+                            <input type="text" id="loginUserName" class="form-control" placeholder="用户名..." name="username">
+                        </div>
+                        <div class="form-group">
+                            <label for="contact-subject" >密码</label>
+                            <input type="text" id="loginPassword" class="form-control" placeholder="密码..." name="password">
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" onclick="login();">登录</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

@@ -4,6 +4,11 @@
 /**
  * 检索
  */
+$(function(){
+    search();
+
+});
+
 function search() {
     var searchContent = $("#searchContent").val();
     $.ajax({
