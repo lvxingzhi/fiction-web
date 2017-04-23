@@ -77,7 +77,7 @@ public class HomePageAction {
      * @throws IOException
      * @throws SQLException
      */
-    @RequestMapping(value="/ajaxSearch", produces = "text/html;charset=UTF-8")
+    @RequestMapping(value="/ajaxSearch", produces = "application/json;charset=UTF-8")
     @ResponseBody
     public String ajaxSearch(String searchContent,Model model) throws IOException, SQLException {
         FictionSearchReq fictionSearchReq = new FictionSearchReq();
