@@ -7,7 +7,9 @@
     <dubbo:registry address="multicast://224.5.6.7:1234" />
     <dubbo:protocol name="dubbo" port="20880" />
     <dubbo:consumer timeout="3000" />
+
     <dubbo:reference id="fictionApiService" interface="com.note.provider.fiction.api.FictionApiService"></dubbo:reference>
     <dubbo:reference id="userApiService" interface="com.note.provider.fiction.api.UserApiService"></dubbo:reference>
+    <dubbo:reference id="adminApiService" interface="com.note.provider.fiction.api.AdminApiService"></dubbo:reference>
 
 </beans>

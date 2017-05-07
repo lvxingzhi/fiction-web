@@ -151,16 +151,19 @@ public class HomePageAction {
      */
     @RequestMapping("/contentPage")
     public String contentPage(String chapterCode,Model model) throws IOException, SQLException {
-        chapterCode="uuuuuuuuuuu1";
         FictionChapterInfoReq fictionChapterInfoReq = new FictionChapterInfoReq();
         fictionChapterInfoReq.setChapterCode(chapterCode);
         String chapterInfo = fictionApiService.findChapterInfo(gson.toJson(fictionChapterInfoReq));
         FictionChapterInfoResp fictionChapterInfoResp = gson.fromJson(chapterInfo, FictionChapterInfoResp.class);
         fictionChapterInfoResp.setChapterContentStr("<p>"+fictionChapterInfoResp.getChapterContentStr().replaceAll("\r\n\r\n","</p><p>").replaceAll(" ","&ensp;")+"</p>");
         model.addAttribute("chapterInfo",fictionChapterInfoResp);
+
+        FictionFindOneReq fictionFindOneReq = new FictionFindOneReq();
+        fictionFindOneReq.setFictionCode(fictionChapterInfoResp.getFictionCode());
+        String infoJson= fictionApiService.findFictionInfo(gson.toJson(fictionFindOneReq));
+        FictionFindOneResp fictionFindOneResp = gson.fromJson(infoJson,new TypeToken<FictionFindOneResp>(){}.getType());
+        model.addAttribute("fictionInfo",fictionFindOneResp);
         return "contentPage";
     }
-
-
 
 }

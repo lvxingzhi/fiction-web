@@ -33,14 +33,45 @@
                                 <label for="basic-url">详细描述</label>
                                 <select name="typeCode" >
                                     <option value="1">
-                                        武侠
+                                        玄幻
                                     </option>
                                     <option value="2">
-                                        修真
+                                        奇幻
                                     </option>
                                     <option value="3">
+                                        武侠
+                                    </option>
+                                    <option value="4">
+                                        仙侠
+                                    </option>
+                                    <option value="5">
                                         都市
                                     </option>
+                                    <option value="6">
+                                        职场
+                                    </option>
+                                    <option value="7">
+                                        军事
+                                    </option>
+                                    <option value="8">
+                                        历史
+                                    </option>
+                                    <option value="9">
+                                        游戏
+                                    </option>
+                                    <option value="10">
+                                        体育
+                                    </option>
+                                    <option value="11">
+                                        科幻
+                                    </option>
+                                    <option value="12">
+                                        灵异
+                                    </option>
+                                    <option value="13">
+                                        二次元
+                                    </option>
+
                                 </select>
                             </li>
                             <li class="list-group-item">

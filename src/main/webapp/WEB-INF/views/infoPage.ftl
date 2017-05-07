@@ -10,7 +10,7 @@
                                 <div class="row">
                                     <div class="col-md-4">
                                         <a href="//book.qidian.com/info/131957" target="_blank"><img
-                                                src="/resources/image/finction-head.jpg"></a>
+                                                src="${fictionInfo.coverPhoto}"></a>
                                     </div>
                                     <div class="col-md-8">
                                         <h1>${fictionInfo.title}
@@ -20,9 +20,13 @@
                                             <p>简介: </p>
                                             <p>${fictionInfo.fullDesc}</p>
                                         </blockquote>
-                                        <a href="/homepage/contentPage">
-                                            <button type="button" class="btn btn-danger btn-lg">在线阅读</button>
-                                        </a>
+                                        <#if chapterList??>
+                                            <#if (chapterList?size>0)>
+                                                <a href="/homepage/contentPage?chapterCode=${chapterList[0].logicCode}">
+                                                    <button type="button" class="btn btn-danger btn-lg">在线阅读</button>
+                                                </a>
+                                            </#if>
+                                        </#if>
                                         <ul class="nav navbar-nav navbar-right">
                                             <li>
                                                 <button type="button" class="btn btn-success">评分</button>

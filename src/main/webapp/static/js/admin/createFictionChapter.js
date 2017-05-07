@@ -4,11 +4,11 @@
 /**
  * 创建小说
  */
-function createFiction() {
+function createFictionChapter() {
     $.ajax({
-            url: "http://localhost:8080/adminManage/createFiction",
+            url: "http://localhost:8080/adminManage/createFictionChapter",
             async: false,
-            data: $("#createFictionForm").serialize(),
+            data: $("#createFictionChapterForm").serialize(),
             dataType: "json",
             type: "post",
             success: function (data) {

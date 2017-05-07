@@ -10,7 +10,7 @@
                     <div class="row read-title">
                         <h3>
                         ${chapterInfo.chapterName}
-                            <small>&lt;冒牌的猫&gt;</small>
+                            <small>&lt;${fictionInfo.authorName}&gt;</small>
                         </h3>
                     </div>
                     <div class="row read-content" id="fictionContent">
@@ -19,8 +19,15 @@
                     <div class="row read-foot">
                         <nav aria-label="...">
                             <ul class="pager">
-                                <li class="previous"><a href="#"><span aria-hidden="true">&larr;</span> 后退</a></li>
-                                <li class="next"><a href="#">前进 <span aria-hidden="true">&rarr;</span></a></li>
+                            <#if chapterInfo.previousCode??>
+                                <li class="previous"><a
+                                        href="/homepage/contentPage?chapterCode=${chapterInfo.previousCode}"><span
+                                        aria-hidden="true">&larr;</span> 后退</a></li>
+                            </#if>
+                            <#if chapterInfo.nextCode??>
+                                <li class="next"><a href="/homepage/contentPage?chapterCode=${chapterInfo.nextCode}">前进 <span aria-hidden="true">&rarr;</span></a></li>
+                            </#if>
+
                             </ul>
                         </nav>
                     </div>
