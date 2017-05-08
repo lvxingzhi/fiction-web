@@ -12,8 +12,8 @@
     <div class="widget">
         <h4 class="title">江湖评分榜</h4>
         <ol>
-        <#if rankList??>
-            <#list rankList as item>
+        <#if scoreList??>
+            <#list scoreList as item>
                 <li><a href="/homepage/infoPage?fictionCode=${item.fictionCode}">[${item.typeName}] ${item.fictionName}</a></li>
             </#list>
         </#if>

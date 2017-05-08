@@ -9,12 +9,12 @@ $(function(){
 
 });
 
-function search() {
+function search(page) {
     var searchContent = $("#searchContent").val();
     $.ajax({
             url: "http://localhost:8080/homepage/ajaxSearch",
             async: false,
-            data: {searchContent: searchContent},
+            data: {searchContent: searchContent,page:page},
             dataType: "json",
             success: function (data) {
                 var array = data.list;

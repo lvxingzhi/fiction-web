@@ -188,6 +188,10 @@
             width:120px;
             height: 150px;;
         }
+        .infoImage{
+            height:290px;
+            width:200px;
+        }
 
         .searchRead-color{
             background-color: #31b0d5;
@@ -219,8 +223,13 @@
                 <a  onclick="javascript:homeSearch();"><button type="button" class="btn btn-default" >搜索</button></a>
             </form>
             <ul class="nav navbar-nav navbar-right">
-                <li><a target="_blank"  onclick="showModalLogin();">登录</a></li>
-                <li><a target="_blank"  onclick="showModalRegist();">注册</a></li>
+                <#if user??>
+                    <li><a target="_blank">${user.name}</a></li>
+                    <li><a target="_blank" onclick="logout();">退出登录</a></li>
+                <#else>
+                    <li><a target="_blank"  onclick="showModalLogin();">登录</a></li>
+                    <li><a target="_blank"  onclick="showModalRegist();">注册</a></li>
+                </#if>
             </ul>
         </nav>
     </div>

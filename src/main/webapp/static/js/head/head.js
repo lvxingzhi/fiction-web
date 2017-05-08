@@ -10,6 +10,26 @@ function homeSearch() {
 }
 
 /**
+ * 登出
+ */
+function logout(){
+    $.ajax({
+            url: "/user/logout",
+            async: false,
+            data: {},
+            dataType: "json",
+            success: function (data) {
+                location.reload()
+            },
+            error: function () {
+            },
+            timeout: function () {
+            }
+        }
+    );
+}
+
+/**
  * 注册弹框
  */
 function showModalRegist() {
@@ -42,7 +62,10 @@ function regist() {
             data: {userName: userName, password: password, email: email, name: name},
             dataType: "json",
             success: function (data) {
-                alert(data);
+                if(data.status==0){
+                    alert("注册成功");
+                    location.reload()
+                }
             },
             error: function () {
             },
@@ -65,7 +88,9 @@ function login() {
             data: {loginUserName: loginUserName, loginPassword: loginPassword},
             dataType: "json",
             success: function (data) {
-                alert(data);
+                if(data.status==0){
+                    location.reload()
+                }
             },
             error: function () {
             },

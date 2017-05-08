@@ -9,7 +9,7 @@
                             <div class="row " id="hotTableContent">
                                 <div class="row">
                                     <div class="col-md-4">
-                                        <a href="//book.qidian.com/info/131957" target="_blank"><img
+                                        <a href="//book.qidian.com/info/131957" target="_blank"><img class="infoImage"
                                                 src="${fictionInfo.coverPhoto}"></a>
                                     </div>
                                     <div class="col-md-8">

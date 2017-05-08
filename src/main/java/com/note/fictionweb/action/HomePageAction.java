@@ -52,7 +52,8 @@ public class HomePageAction {
         fictionSearchReq.setOrderByType("desc");
         fictionSearchReq.setSize(12);
         String fullJson = fictionApiService.findFull(gson.toJson(fictionSearchReq));
-        List<FictionSearchResp> fullList = gson.fromJson(fullJson,new TypeToken<List<FictionSearchResp>>(){}.getType());
+        HashMap<String,Object> resultMap= gson.fromJson(fullJson,new TypeToken<HashMap<String,Object>>(){}.getType());
+        List<FictionSearchResp> fullList = (List<FictionSearchResp>) resultMap.get("list");
         FictionRankSearchReq fictionRankSearchReq = new FictionRankSearchReq();
         fictionRankSearchReq.setRankType(FictionRankTypeEnum.VIEW.getType());
         fictionRankSearchReq.setSize(10);
@@ -79,14 +80,17 @@ public class HomePageAction {
      */
     @RequestMapping(value="/ajaxSearch", produces = "application/json;charset=UTF-8")
     @ResponseBody
-    public String ajaxSearch(String searchContent,Model model) throws IOException, SQLException {
+    public String ajaxSearch(String searchContent,int page,Model model) throws IOException, SQLException {
         FictionSearchReq fictionSearchReq = new FictionSearchReq();
         fictionSearchReq.setTitle(searchContent);
+        fictionSearchReq.setPage(page);
         fictionSearchReq.setSize(5);
         String json = fictionApiService.findFull(gson.toJson(fictionSearchReq));
-        List<FictionSearchResp> list = gson.fromJson(json,new TypeToken<List<FictionSearchResp>>(){}.getType());
-        HashMap<String,Object> resultMap = new HashMap<>();
+        HashMap<String,Object> resultMap= gson.fromJson(json,new TypeToken<HashMap<String,Object>>(){}.getType());
+        List<FictionSearchResp> list = (List<FictionSearchResp>) resultMap.get("list");
+        int count = (int) resultMap.get("count");
         resultMap.put("list",list);
+        resultMap.put("count",count);
         return gson.toJson(resultMap);
     }
 

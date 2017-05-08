@@ -18,7 +18,7 @@
                                                 <p>${item.title}</p>
                                                 <p>${item.authorName}</p>
                                                 <p>${item.shortDesc}</p>
-                                                <p>${item.createTime?string("yyyy-MM-dd HH:mm:ss")}</p>
+                                                <p>${item.createTime}</p>
                                             </div>
                                         </a>
                                     </div>
@@ -42,7 +42,7 @@
                                                 <p>${item.title}</p>
                                                 <p>${item.authorName}</p>
                                                 <p>${item.shortDesc}</p>
-                                                <p>${item.createTime?string("yyyy-MM-dd HH:mm:ss")}</p>
+                                                <p>${item.createTime}</p>
                                             </div>
                                         </a>
                                     </div>
