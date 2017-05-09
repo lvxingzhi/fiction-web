@@ -25,7 +25,7 @@
             <li><a>微信号:weixinhao</a></li>
         </ol>
     </div>
-    <div class="widget">
+    <div class="widget hide">
         <h4 class="title">滚动评论</h4>
         <ol>
             <li><a>礼拜太逗说: 这本小说写得太好了...</a></li>

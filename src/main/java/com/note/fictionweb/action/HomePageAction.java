@@ -81,7 +81,7 @@ public class HomePageAction {
         String json = fictionApiService.findFull(JsonUtil.toJson(fictionSearchReq));
         HashMap<String,Object> resultMap= JsonUtil.fromJson(json,new TypeToken<HashMap<String,Object>>(){}.getType());
         List<FictionSearchResp> list = (List<FictionSearchResp>) resultMap.get("list");
-        int count = (int) resultMap.get("count");
+        int count = new Integer(resultMap.get("count")+"");
         resultMap.put("list",list);
         resultMap.put("count",count);
         resultMap.put("maxPage",(count/fictionSearchReq.getSize())+1);
@@ -112,6 +112,7 @@ public class HomePageAction {
         model.addAttribute("viewsList",viewsList);
         model.addAttribute("scoreList",scoreList);
         model.addAttribute("headContent", ObjectUtil.isNull(headContent)?"":headContent);
+        model.addAttribute("page",1);
         return "search";
     }
 

@@ -19,16 +19,19 @@
 
                                 <div class="input-group" style="margin-bottom: 30px;margin-top: 20px;">
                                     <input type="text" class="form-control" id="searchContent" value="${headContent}">
-                                    <span class="input-group-addon pointer-style" onclick="search();" >搜索</span>
+                                    <span class="input-group-addon pointer-style" onclick="search(1);">搜索</span>
                                 </div>
 
                                 <ul class="list-group" id="listContent">
                                 </ul>
 
                                 <nav aria-label="...">
+                                    <input type="hidden" id="page" value="1">
                                     <ul class="pager">
-                                        <li class="previous"><a href="#"><span aria-hidden="true">&larr;</span> 后退</a></li>
-                                        <li class="next"><a href="#">前进 <span aria-hidden="true">&rarr;</span></a></li>
+                                        <li class="previous"><a  id="prePage" style="display:none;" onclick="preSearch()"><span
+                                                aria-hidden="true">&larr;</span> 后退</a></li>
+                                        <li class="next"><a  id="nextPage" style="display:none;" onclick="nextSearch()">前进 <span
+                                                aria-hidden="true">&rarr;</span></a></li>
                                     </ul>
                                 </nav>
 

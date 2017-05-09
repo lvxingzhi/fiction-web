@@ -5,8 +5,7 @@
  * 检索
  */
 $(function(){
-    search();
-
+    search(1);
 });
 
 function search(page) {
@@ -14,7 +13,7 @@ function search(page) {
     $.ajax({
             url: "http://localhost:8080/homepage/ajaxSearch",
             async: false,
-            data: {searchContent: searchContent,page:page},
+            data: {searchContent: searchContent,page:page,size:5},
             dataType: "json",
             success: function (data) {
                 var array = data.list;
@@ -31,6 +30,18 @@ function search(page) {
                         '<p>字数: '+item.totalWord+'</p></div></div></li>';
                 });
                 $("#listContent").html(listContent);
+                var maxPage = data.maxPage;
+                $("#page").val(page);
+                if(page>1){
+                    $("#prePage").show();
+                }else{
+                    $("#prePage").hide();
+                }
+                if(maxPage>page){
+                    $("#nextPage").show();
+                }else{
+                    $("#nextPage").hide();
+                }
                 
             },
             error: function () {
@@ -40,4 +51,21 @@ function search(page) {
         }
     );
 
+}
+
+/**
+ * 后退
+  */
+
+function preSearch(){
+    var page =$("#page").val();
+    search(parseInt(page)-1);
+}
+
+/**
+ * 前进
+ */
+function nextSearch(){
+    var page =$("#page").val();
+    search(parseInt(page)+1);
 }
