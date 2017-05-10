@@ -6,6 +6,7 @@ import com.note.entity.fiction.entity.SystemUserEntity;
 import com.note.provider.fiction.api.UserApiService;
 import com.note.provider.fiction.dto.request.SystemUserLoginReq;
 import com.note.provider.fiction.dto.request.SystemUserReq;
+import com.note.provider.fiction.dto.request.SystemUserUpdateExtReq;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -44,7 +45,7 @@ public class UserAction {
         SystemUserReq systemUserReq = new SystemUserReq();
         systemUserReq.setName(name);
         systemUserReq.setEmail(email);
-        systemUserReq.setUserName(userName);
+        systemUserReq.setLoginName(userName);
         systemUserReq.setPassword(password);
         String result = userApiService.add(JsonUtil.toJson(systemUserReq));
         if("0".equals(result)){
@@ -73,9 +74,14 @@ public class UserAction {
         String result =  userApiService.find(JsonUtil.toJson(systemUserLoginReq));
         SystemUserEntity systemUserEntity = JsonUtil.fromJson(result,SystemUserEntity.class);
         if(!ObjectUtil.isNull(systemUserEntity)){
+            // 首次增加积分
+            SystemUserUpdateExtReq systemUserUpdateExtReq = new SystemUserUpdateExtReq();
+            systemUserUpdateExtReq.setLoginName(loginUserName);
+            systemUserUpdateExtReq.setChangeLevel(0);
+            systemUserUpdateExtReq.setChangeScore(2);
+            userApiService.updateExtensionInfo(JsonUtil.toJson(systemUserUpdateExtReq));
             session.setAttribute("user",systemUserEntity);
             resultMap.put("status",0);
-
             return gson.toJson(resultMap);
         }
         resultMap.put("status",1);

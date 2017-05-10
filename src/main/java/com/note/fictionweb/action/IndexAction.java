@@ -29,4 +29,20 @@ public class IndexAction {
     public String index(Model model) throws IOException, SQLException {
         return "redirect:/homepage/home";
     }
+
+    @RequestMapping("/error400")
+    public String error400(Model model) throws IOException, SQLException {
+        return "/error/400";
+    }
+
+    @RequestMapping("/error404")
+    public String error404(Model model) throws IOException, SQLException {
+        return "/error/404";
+    }
+
+    @RequestMapping("/error500")
+    public String error500(Model model) throws IOException, SQLException {
+        return "/error/500";
+    }
+
 }

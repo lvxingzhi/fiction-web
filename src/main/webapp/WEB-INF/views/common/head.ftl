@@ -224,7 +224,9 @@
             </form>
             <ul class="nav navbar-nav navbar-right">
                 <#if user??>
-                    <li><a target="_blank">${user.name}</a></li>
+                    <li><a target="_blank">昵称:${user.name}</a></li>
+                    <li><a target="_blank">等级:${user.level}</a></li>
+                    <li><a target="_blank">积分:${user.score}</a></li>
                     <li><a target="_blank" onclick="logout();">退出登录</a></li>
                 <#else>
                     <li><a target="_blank"  onclick="showModalLogin();">登录</a></li>
@@ -244,28 +246,33 @@
     <div class="container" >
         <ul class="jobs-tabs nav nav-tabs">
             <li>
-                <a class="nav-link active">
+                <a class="nav-link active" href="/homepage/home">
                     首页
                 </a>
             </li>
             <li>
-                <a class="nav-link ">
+                <a class="nav-link " href="/homepage/home?type=1" type="1">
+                    玄幻
+                </a>
+            </li>
+            <li>
+                <a class="nav-link " href="/homepage/home?type=3" type="3">
                     武侠
                 </a>
             </li>
             <li>
-                <a class="nav-link ">
+                <a class="nav-link " href="/homepage/home?type=5" type="5">
                     都市
                 </a>
             </li>
             <li>
-                <a class="nav-link ">
-                    言情
+                <a class="nav-link " href="/homepage/home?type=7" type="7">
+                    军事
                 </a>
             </li>
             <li>
-                <a class="nav-link ">
-                    玄幻
+                <a class="nav-link " href="/homepage/home?type=12" type="12">
+                    灵异
                 </a>
             </li>
             <li class="dropdown ">
@@ -273,13 +280,28 @@
                         class="caret"></strong></a>
                 <ul class="dropdown-menu">
                     <li>
-                        <a href="#">恐怖</a>
+                        <a href="/homepage/home?type=2" type="2">奇幻</a>
                     </li>
                     <li>
-                        <a href="#">侦探</a>
+                        <a href="/homepage/home?type=4"  type="4">仙侠</a>
                     </li>
                     <li>
-                        <a href="#">穿越</a>
+                        <a href="/homepage/home?type=6"  type="6">职场</a>
+                    </li>
+                    <li>
+                        <a href="/homepage/home?type=8"  type="8">历史</a>
+                    </li>
+                    <li>
+                        <a href="/homepage/home?type=9"  type="9">游戏</a>
+                    </li>
+                    <li>
+                        <a href="/homepage/home?type=10"  type="10">体育</a>
+                    </li>
+                    <li>
+                        <a href="/homepage/home?type=11"  type="11">科幻</a>
+                    </li>
+                    <li>
+                        <a href="/homepage/home?type=13"  type="13">二次元</a>
                     </li>
                     <li class="divider">
                     </li>

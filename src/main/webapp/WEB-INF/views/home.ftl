@@ -5,11 +5,11 @@
             <div class="panel-body">
                 <main class="col-md-9">
                     <div class="panel ">
-                        <h3 class="title">人气连载</h3>
+                        <h3 class="title">最近更新</h3>
                         <div class="panel-body">
                             <div class="row " id="hotTableContent">
-                            <#if fullList??>
-                                <#list fullList as item>
+                            <#if timeFullList??>
+                                <#list timeFullList as item>
                                     <div class="col-md-3 ">
                                         <a class="thumbnail"
                                            href="/homepage/infoPage?fictionCode=${item.logicCode}"><img
@@ -28,12 +28,11 @@
                         </div>
                     </div>
                     <div class="panel ">
-                        <h3 class="title">全站精品</h3>
+                        <h3 class="title">热门书籍</h3>
                         <div class="panel-body">
                             <div class="row ">
-                            <#if fullList??>
-                                <#list fullList as item>
-
+                            <#if scoreFullList??>
+                                <#list scoreFullList as item>
                                     <div class="col-md-3 ">
                                         <a class="thumbnail"
                                            href="/homepage/infoPage?fictionCode=${item.logicCode}"><img
