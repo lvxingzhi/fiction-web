@@ -213,7 +213,7 @@
     <div class="container">
         <div class="navbar-header">
             <a style="font-family:楷体_GB2312;font-size: x-large;font-weight: bolder;" class="navbar-brand"
-               href="/">江湖故事</a>
+               href="http://www.xiangyuewu.com">香悦屋中文网</a>
         </div>
         <nav class="collapse navbar-collapse">
             <form class="navbar-form navbar-left">
