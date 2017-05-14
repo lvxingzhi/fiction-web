@@ -10,7 +10,7 @@
                                 <div class="row">
                                     <div class="col-md-4">
                                         <a href="//book.qidian.com/info/131957" target="_blank"><img class="infoImage"
-                                                src="${fictionInfo.coverPhoto}"></a>
+                                                                                                     src="${fictionInfo.coverPhoto}"></a>
                                     </div>
                                     <div class="col-md-8">
                                         <h1>${fictionInfo.title}
@@ -20,13 +20,13 @@
                                             <p>简介: </p>
                                             <p>${fictionInfo.fullDesc}</p>
                                         </blockquote>
-                                        <#if chapterList??>
-                                            <#if (chapterList?size>0)>
-                                                <a href="/homepage/contentPage?chapterCode=${chapterList[0].logicCode}">
-                                                    <button type="button" class="btn btn-danger btn-lg">在线阅读</button>
-                                                </a>
-                                            </#if>
+                                    <#if chapterList??>
+                                        <#if (chapterList?size>0)>
+                                            <a href="/homepage/contentPage?chapterCode=${chapterList[0].logicCode}">
+                                                <button type="button" class="btn btn-danger btn-lg">在线阅读</button>
+                                            </a>
                                         </#if>
+                                    </#if>
                                         <ul class="nav navbar-nav navbar-right">
                                             <li>
                                                 <button type="button" class="btn btn-success">评分</button>
@@ -55,22 +55,29 @@
             </div>
         </div>
     </div>
-    <div class="row ">
-        <div class="panel ">
-            <div class="panel-heading title"><h3>作品目录</h3></div>
-            <div class="panel-body">
-                <#if chapterList??>
-                    <#list chapterList as item>
-                        <div class="col-md-4">
-                            <p class="text-center "><a class="pointer-style" onclick="showChapterInfo('${item.logicCode}');">${item.chapterName}</a></p>
-                        </div>
-                    </#list>
-                </#if>
-            </div>
-        </div>
+<div class="row ">
+<div class="panel ">
+    <div class="panel-heading title"><h3>作品目录</h3></div>
+<div class="panel-body">
+    <div class="col-md-1">
+
+    </div>
+    <div class="col-md-11">
+        <#if chapterList??>
+            <#list chapterList as item>
+                <div class="col-md-4">
+                    <p class="text-left "><a class="pointer-style"
+                                               onclick="showChapterInfo('${item.logicCode}');">${item.chapterName}</a>
+                    </p>
+                </div>
+            </#list>
+        </#if>
     </div>
 </div>
-<#include "/common/foot.ftl"/>
+</div>
+</div>
+</div>
+    <#include "/common/foot.ftl"/>
 <script src="/resources/plugin/jquery/jquery.js"></script>
 <script src="/resources/plugin/bootstrap/js/bootstrap.js"></script>
 <#--<script src="/resources/plugin/bootstrap/js/npm.js"></script>-->
