@@ -4,6 +4,7 @@
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>香悦屋中文网-网络小说</title>
+    <link rel="shortcut  icon" type="image/x-icon" href="/resources/image/icon-small.ico" media="screen"  />
     <link href="/resources/plugin/bootstrap/css/bootstrap.css" rel="stylesheet"/>
     <link href="/resources/plugin/bootstrap/css/bootstrap-theme.css" rel="stylesheet"/>
     <style type="text/css">
