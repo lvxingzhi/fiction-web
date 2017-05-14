@@ -12,12 +12,12 @@
                                 <#list timeFullList as item>
                                     <div class="col-md-3 ">
                                         <a class="thumbnail"
-                                           href="/homepage/infoPage?fictionCode=${item.logicCode}"><img
-                                                src="/resources/image/1.jpg"/>
+                                           href="/homepage/infoPage?fictionCode=${item.logicCode}">
+                                            <img class="home-head-img" src="${item.coverPhoto}"/>
                                             <div class="caption">
-                                                <p>${item.title}</p>
-                                                <p>${item.authorName}</p>
-                                                <p>${item.shortDesc}</p>
+                                                <p class="line-width-text-title">${item.title}</p>
+                                                <small class="line-width-text-author">作者:${item.authorName}</small>
+                                                <p >简介:${item.subShortDesc}</p>
                                                 <p>${item.createTime}</p>
                                             </div>
                                         </a>
@@ -35,12 +35,12 @@
                                 <#list scoreFullList as item>
                                     <div class="col-md-3 ">
                                         <a class="thumbnail"
-                                           href="/homepage/infoPage?fictionCode=${item.logicCode}"><img
-                                                src="/resources/image/1.jpg"/>
+                                           href="/homepage/infoPage?fictionCode=${item.logicCode}">
+                                            <img class="home-head-img" src="${item.coverPhoto}"/>
                                             <div class="caption">
-                                                <p>${item.title}</p>
-                                                <p>${item.authorName}</p>
-                                                <p>${item.shortDesc}</p>
+                                                <p class="line-width-text">${item.title}</p>
+                                                <small class="line-width-text-author" >作者:${item.authorName}</small>
+                                                <p >简介:${item.subShortDesc}</p>
                                                 <p>${item.createTime}</p>
                                             </div>
                                         </a>

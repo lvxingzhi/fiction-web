@@ -11,7 +11,7 @@ $(function(){
 function search(page) {
     var searchContent = $("#searchContent").val();
     $.ajax({
-            url: "http://localhost:8080/homepage/ajaxSearch",
+            url: "/homepage/ajaxSearch",
             async: false,
             data: {searchContent: searchContent,page:page,size:5},
             dataType: "json",

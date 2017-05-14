@@ -6,7 +6,7 @@
  */
 function createFictionChapter() {
     $.ajax({
-            url: "http://localhost:8080/adminManage/createFictionChapter",
+            url: "/adminManage/createFictionChapter",
             async: false,
             data: $("#createFictionChapterForm").serialize(),
             dataType: "json",

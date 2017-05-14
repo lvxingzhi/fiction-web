@@ -14,7 +14,7 @@
                         </h3>
                     </div>
                     <div class="row read-content" id="fictionContent">
-                    ${chapterInfo.chapterContentStr}
+                    ${chapterInfo.chapterContent}
                     </div>
                     <div class="row read-foot">
                         <nav aria-label="...">

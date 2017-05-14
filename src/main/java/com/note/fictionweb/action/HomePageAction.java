@@ -142,7 +142,7 @@ public class HomePageAction {
         fictionChapterInfoReq.setChapterCode(chapterCode);
         String chapterInfo = fictionApiService.findChapterInfo(JsonUtil.toJson(fictionChapterInfoReq));
         FictionChapterInfoResp fictionChapterInfoResp = JsonUtil.fromJson(chapterInfo, FictionChapterInfoResp.class);
-        fictionChapterInfoResp.setChapterContentStr("<p>" + fictionChapterInfoResp.getChapterContentStr().replaceAll("\r\n\r\n", "</p><p>").replaceAll(" ", "&ensp;") + "</p>");
+        fictionChapterInfoResp.setChapterContent("<p>" + fictionChapterInfoResp.getChapterContent().replaceAll("\r\n\r\n", "</p><p>").replaceAll("\r\n", "</p><p>").replaceAll("\n", "</p><p>").replaceAll("\r", "</p><p>").replaceAll(" ", "&nbsp;") + "</p>");
         model.addAttribute("chapterInfo", fictionChapterInfoResp);
 
         FictionFindOneReq fictionFindOneReq = new FictionFindOneReq();

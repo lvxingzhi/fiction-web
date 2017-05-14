@@ -3,7 +3,7 @@
 <head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fiction home page</title>
+    <title>香悦屋中文网-网络小说</title>
     <link href="/resources/plugin/bootstrap/css/bootstrap.css" rel="stylesheet"/>
     <link href="/resources/plugin/bootstrap/css/bootstrap-theme.css" rel="stylesheet"/>
     <style type="text/css">
@@ -201,7 +201,36 @@
         .pointer-style{
             cursor:pointer;
         }
+        .line-width-text{
+            text-overflow:ellipsis;
+            overflow:hidden;
+            white-space: nowrap;
+        }
+        .line-width-rank-text{
+            cursor: pointer;
+            text-overflow:ellipsis;
+            overflow:hidden;
+            white-space: nowrap;
+        }
+        .line-width-rank-text:hover{
+            color: #f0769f;
+        }
+        .line-width-text-title{
+            text-overflow:ellipsis;
+            overflow:hidden;
+            white-space: nowrap;
+            font-weight:bold;
+        }
+        .line-width-text-author{
+            text-overflow:ellipsis;
+            overflow:hidden;
+            white-space: nowrap;
+            color:#777;
+        }
 
+        .home-head-img{
+            max-height:130px;
+        }
 
     </style>
 </head>
@@ -209,10 +238,10 @@
 <script src="/resources/js/head/head.js"></script>
 <body class="background1">
 <base target='_blank'>
-<header class="navbar-static-top navbar-fixed-top navbar-inverse">
+<header class="navbar-static-top navbar-fixed-top navbar-inverse" style="background: #f0cac9 none repeat scroll 0 0;">
     <div class="container">
         <div class="navbar-header">
-            <a style="font-family:楷体_GB2312;font-size: x-large;font-weight: bolder;" class="navbar-brand"
+            <a style="font-family:楷体_GB2312;font-size: x-large;font-weight: bolder; color: #fff;" class="navbar-brand"
                href="http://www.xiangyuewu.com">香悦屋中文网</a>
         </div>
         <nav class="collapse navbar-collapse">
@@ -224,13 +253,13 @@
             </form>
             <ul class="nav navbar-nav navbar-right">
                 <#if user??>
-                    <li><a target="_blank">昵称:${user.name}</a></li>
-                    <li><a target="_blank">等级:${user.level}</a></li>
-                    <li><a target="_blank">积分:${user.score}</a></li>
-                    <li><a target="_blank" onclick="logout();">退出登录</a></li>
+                    <li><a style="color: #fff;" target="_blank">昵称:${user.name}</a></li>
+                    <li><a style="color: #fff;" target="_blank">等级:${user.level}</a></li>
+                    <li><a style="color: #fff;" target="_blank">积分:${user.score}</a></li>
+                    <li><a style="color: #fff;" target="_blank" onclick="logout();">退出登录</a></li>
                 <#else>
-                    <li><a target="_blank"  onclick="showModalLogin();">登录</a></li>
-                    <li><a target="_blank"  onclick="showModalRegist();">注册</a></li>
+                    <li><a style="color: #fff;" target="_blank"  onclick="showModalLogin();">登录</a></li>
+                    <li><a style="color: #fff;" target="_blank"  onclick="showModalRegist();">注册</a></li>
                 </#if>
             </ul>
         </nav>
