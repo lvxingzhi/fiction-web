@@ -1,4 +1,6 @@
 <configuration>
+    <contextName>fiction-web</contextName>
+    <property name="log_path" value="/home/logs" />
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
             <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level %logger{36} - %msg%n</pattern>
@@ -7,10 +9,10 @@
     </appender>
 
     <appender name="ALL" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>/home/logs/all-web.log</file>
+        <file>${log_path}/all-web.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <!-- daily rollover -->
-            <fileNamePattern>/home/logs/all-web.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <fileNamePattern>${log_path}/all-web.%d{yyyy-MM-dd}.log</fileNamePattern>
             <!-- keep 30 days' worth of history capped at 3GB total size -->
             <maxHistory>60</maxHistory>
             <totalSizeCap>2GB</totalSizeCap>
@@ -22,10 +24,10 @@
     </appender>
 
     <appender name="SYSTEM" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>/home/logs/system-web.log</file>
+        <file>${log_path}/system-web.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <!-- daily rollover -->
-            <fileNamePattern>/home/logs/system-web.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <fileNamePattern>${log_path}/system-web.%d{yyyy-MM-dd}.log</fileNamePattern>
             <!-- keep 30 days' worth of history capped at 3GB total size -->
             <maxHistory>60</maxHistory>
             <totalSizeCap>2GB</totalSizeCap>
