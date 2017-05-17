@@ -10,6 +10,8 @@ import com.note.provider.fiction.dto.request.FictionChapterInfoReq;
 import com.note.provider.fiction.dto.request.FictionChapterReq;
 import com.note.provider.fiction.dto.request.FictionFindOneReq;
 import com.note.provider.fiction.dto.response.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,6 +30,7 @@ import java.util.List;
 @Controller
 @RequestMapping("homepage")
 public class HomePageAction {
+    Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Resource(name = "fictionApiService")
     private FictionApiService fictionApiService;
@@ -45,6 +48,7 @@ public class HomePageAction {
      */
     @RequestMapping("/home")
     public String index(Model model, String type) throws IOException, SQLException {
+        logger.info("进入主页");
         // 时间排序列表
         List<FictionSearchResp> timeFullList = fictionLogic.findTimeFullList(type);
         // 分数排序
