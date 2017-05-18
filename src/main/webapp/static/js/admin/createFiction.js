@@ -12,7 +12,7 @@ function createFiction() {
             dataType: "json",
             type: "post",
             success: function (data) {
-               if("0"==data){
+               if("0"==data.status){
                    alert("保存成功");
                }else{
                    alert("保存失败");
