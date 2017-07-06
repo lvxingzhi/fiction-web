@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.note.fiction.dao.AccessLogDao">
+  <resultMap id="BaseResultMap" type="com.note.fiction.entity.AccessLogEntity">
+    <id column="cid" jdbcType="BIGINT" property="cid" />
+    <result column="access_url" jdbcType="VARCHAR" property="accessUrl" />
+    <result column="access_ip" jdbcType="VARCHAR" property="accessIp" />
+    <result column="access_time" jdbcType="TIMESTAMP" property="accessTime" />
+    <result column="user_code" jdbcType="VARCHAR" property="userCode" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from access_log
+    where cid = #{cid,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.note.fiction.entity.AccessLogEntity">
+    insert into access_log (access_url, access_ip,
+      access_time, user_code)
+    values (#{accessUrl,jdbcType=VARCHAR}, #{accessIp,jdbcType=VARCHAR},
+      #{accessTime,jdbcType=TIMESTAMP}, #{userCode,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.note.fiction.entity.AccessLogEntity">
+    update access_log
+    set access_url = #{accessUrl,jdbcType=VARCHAR},
+      access_ip = #{accessIp,jdbcType=VARCHAR},
+      access_time = #{accessTime,jdbcType=TIMESTAMP},
+      user_code = #{userCode,jdbcType=VARCHAR}
+    where cid = #{cid,jdbcType=BIGINT}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select cid, access_url, access_ip, access_time, user_code
+    from access_log
+    where cid = #{cid,jdbcType=BIGINT}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select cid, access_url, access_ip, access_time, user_code
+    from access_log
+  </select>
+</mapper>
