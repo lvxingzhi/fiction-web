@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.note.fiction.dao.FictionBaseDao">
+    <resultMap id="result" type="com.note.fiction.entity.FictionBaseEntity">
+        <result column="cid" property="cid"/>
+        <result column="logic_code" property="logicCode"/>
+        <result column="title" property="title"/>
+        <result column="short_desc" property="shortDesc"/>
+        <result column="fiction_status" property="fictionStatus"/>
+        <result column="cover_photo" property="coverPhoto"/>
+        <result column="author_code" property="authorCode"/>
+        <result column="author_name" property="authorName"/>
+        <result column="type_code" property="typeCode"/>
+        <result column="type_name" property="typeName"/>
+        <result column="create_time" property="createTime"/>
+        <result column="create_user_code" property="createUserCode"/>
+        <result column="modify_time" property="modifyTime"/>
+        <result column="modify_user_code" property="modifyUserCode"/>
+        <result column="is_delete" jdbcType="INTEGER" property="isDelete"/>
+    </resultMap>
+
+    <resultMap id="fullResult" type="com.note.fiction.dto.response.FictionSearchResp">
+        <result column="logic_code" property="logicCode"/>
+        <result column="title" property="title"/>
+        <result column="short_desc" property="shortDesc"/>
+        <result column="author_code" property="authorCode"/>
+        <result column="author_name" property="authorName"/>
+        <result column="fiction_status" property="fictionStatus"/>
+        <result column="cover_photo" property="coverPhoto"/>
+        <result column="type_code" property="typeCode"/>
+        <result column="type_name" property="typeName"/>
+        <result column="create_time" property="createTime"/>
+        <result column="create_user_code" property="createUserCode"/>
+        <result column="full_desc" jdbcType="VARCHAR" property="fullDesc" />
+        <result column="total_chapter" jdbcType="INTEGER" property="totalChapter" />
+        <result column="total_word" jdbcType="INTEGER" property="totalWord" />
+        <result column="last_update_time" jdbcType="TIMESTAMP" property="lastUpdateTime" />
+        <result column="level" jdbcType="INTEGER" property="level" />
+        <result column="fiction_views" jdbcType="INTEGER" property="fictionViews" />
+        <result column="fiction_score" jdbcType="DOUBLE" property="fictionScore" />
+        <result column="fiction_score_num" jdbcType="INTEGER" property="fictionScoreNum" />
+        <result column="last_chapter_name" jdbcType="VARCHAR" property="lastChapterName" />
+        <result column="last_chapter_code" jdbcType="VARCHAR" property="lastChapterCode" />
+    </resultMap>
+
+    <resultMap id="oneResult" type="com.note.fiction.dto.response.FictionFindOneResp">
+        <result column="logic_code" property="logicCode"/>
+        <result column="title" property="title"/>
+        <result column="short_desc" property="shortDesc"/>
+        <result column="author_code" property="authorCode"/>
+        <result column="author_name" property="authorName"/>
+        <result column="fiction_status" property="fictionStatus"/>
+        <result column="cover_photo" property="coverPhoto"/>
+        <result column="type_code" property="typeCode"/>
+        <result column="type_name" property="typeName"/>
+        <result column="create_time" property="createTime"/>
+        <result column="create_user_code" property="createUserCode"/>
+        <result column="full_desc" jdbcType="VARCHAR" property="fullDesc" />
+        <result column="total_chapter" jdbcType="INTEGER" property="totalChapter" />
+        <result column="total_word" jdbcType="INTEGER" property="totalWord" />
+        <result column="last_update_time" jdbcType="TIMESTAMP" property="lastUpdateTime" />
+        <result column="level" jdbcType="INTEGER" property="level" />
+        <result column="fiction_views" jdbcType="INTEGER" property="fictionViews" />
+        <result column="fiction_score_num" jdbcType="INTEGER" property="fictionScoreNum" />
+        <result column="fiction_score" jdbcType="DOUBLE" property="fictionScore" />
+        <result column="last_chapter_name" jdbcType="VARCHAR" property="lastChapterName" />
+        <result column="last_chapter_code" jdbcType="VARCHAR" property="lastChapterCode" />
+    </resultMap>
+
+    <select id="selectByCondition" parameterType="map" resultMap="result">
+        select
+        cid,logic_code,title,short_desc,fiction_status,cover_photo,author_code,author_name,type_code,type_name,create_time,create_user_code,modify_time,
+        modify_user_code
+         from fiction_base
+         <where>
+             <if test="name!=null and name!=''" >
+                 title like concat(#{name},'%')
+             </if>
+         </where>
+
+    </select>
+
+    <select id="selectFullByCondition" parameterType="map" resultMap="fullResult">
+        select
+        fb.cid,fb.logic_code,fb.title,fb.short_desc,fb.fiction_status,fb.cover_photo,fb.author_code,fb.author_name,
+        fb.type_code,fb.type_name,fb.create_time,fb.create_user_code,fext.full_desc,
+        fext.total_chapter,fext.last_update_time,fext.level,fext.total_word,fext.fiction_views,fext.fiction_score_num,fext.fiction_score,fext.last_chapter_name,fext.last_chapter_code
+        from fiction_base fb
+        left join fiction_extention fext on fb.logic_code=fext.fiction_code
+        <where>
+            1=1
+            <if test="searchContent.title!=null and searchContent.title!=''" >
+                and fb.title like concat(#{searchContent.title},'%')
+            </if>
+            <if test="searchContent.authorName!=null and searchContent.authorName!=''" >
+                and fb.author_name = #{authorName}
+            </if>
+            <if test="searchContent.authorCode!=null and searchContent.authorCode!=''" >
+                and fb.author_code = #{searchContent.authorCode}
+            </if>
+            <if test="searchContent.typeCode!=null and searchContent.typeCode!=''" >
+                and fb.type_code = #{searchContent.typeCode}
+            </if>
+            <if test="searchContent.fictionStatus!=null and searchContent.fictionStatus!=''" >
+                and fb.fiction_status = #{searchContent.fictionStatus}
+            </if>
+            and fb.is_delete = 0
+        </where>
+        <choose>
+            <when test="searchContent.orderBy!=null and searchContent.orderBy!=''" >
+                order by #{searchContent.orderBy} <if test="searchContent.orderByType!=null and searchContent.orderByType!='' and (searchContent.orderByType='desc' or searchContent.orderByType='asc')">#{searchContent.orderByType}</if>
+            </when>
+            <otherwise>
+                order by create_time desc
+            </otherwise>
+        </choose>
+    </select>
+
+    <select id="selectFullCountByCondition" parameterType="map" resultType="java.lang.Integer">
+        select count(1) from (
+        select
+        fb.cid,fb.logic_code,fb.title,fb.short_desc,fb.fiction_status,fb.cover_photo,fb.author_code,fb.author_name,
+        fb.type_code,fb.type_name,fb.create_time,fb.create_user_code,fext.full_desc,
+        fext.total_chapter,fext.last_update_time,fext.level,fext.total_word,fext.fiction_views,fext.fiction_score_num,fext.fiction_score,fext.last_chapter_name,fext.last_chapter_code
+        from fiction_base fb
+        left join fiction_extention fext on fb.logic_code=fext.fiction_code
+        <where>
+            1=1
+            <if test="searchContent.title!=null and searchContent.title!=''" >
+                and fb.title like concat(#{searchContent.title},'%')
+            </if>
+            <if test="searchContent.authorName!=null and searchContent.authorName!=''" >
+                and fb.author_name = #{authorName}
+            </if>
+            <if test="searchContent.authorCode!=null and searchContent.authorCode!=''" >
+                and fb.author_code = #{searchContent.authorCode}
+            </if>
+            <if test="searchContent.typeCode!=null and searchContent.typeCode!=''" >
+                and fb.type_code = #{searchContent.typeCode}
+            </if>
+            <if test="searchContent.fictionStatus!=null and searchContent.fictionStatus!=''" >
+                and fb.fiction_status = #{searchContent.fictionStatus}
+            </if>
+            and fb.is_delete = 0
+        </where>
+        <choose>
+            <when test="searchContent.orderBy!=null and searchContent.orderBy!=''" >
+                order by #{searchContent.orderBy} <if test="searchContent.orderByType!=null and searchContent.orderByType!='' and (searchContent.orderByType='desc' or searchContent.orderByType='asc')">#{searchContent.orderByType}</if>
+            </when>
+            <otherwise>
+                order by create_time desc
+            </otherwise>
+        </choose>
+        ) t
+    </select>
+
+    <select id="selectOneByCondition" parameterType="map" resultMap="oneResult">
+        select
+        fb.cid,fb.logic_code,fb.title,fb.short_desc,fb.fiction_status,fb.cover_photo,fb.author_code,fb.author_name,
+        fb.type_code,fb.type_name,fb.create_time,fb.create_user_code,fext.full_desc,fext.total_word,
+        fext.total_chapter,fext.last_update_time,fext.level,fext.fiction_views,fext.fiction_score_num,fext.fiction_score,fext.last_chapter_name,fext.last_chapter_code
+        from fiction_base fb
+        left join fiction_extention fext on fb.logic_code=fext.fiction_code
+        <where>
+            1=1
+            and fb.logic_code = #{searchContent.fictionCode}
+            and fb.is_delete = 0
+        </where>
+    </select>
+
+    <insert id="insert" parameterType="com.note.fiction.entity.FictionBaseEntity" >
+        insert into fiction_base(
+        logic_code,title,short_desc,fiction_status,cover_photo,author_name,
+        type_code,type_name,create_time,create_user_code,modify_time,modify_user_code,is_delete
+        ) values(
+        #{logicCode},#{title},#{shortDesc},#{fictionStatus},#{coverPhoto},#{authorName},#{typeCode}
+        ,#{typeName},#{createTime},#{createUserCode},#{modifyTime},#{modifyUserCode},#{isDelete}
+        )
+    </insert>
+
+
+</mapper>

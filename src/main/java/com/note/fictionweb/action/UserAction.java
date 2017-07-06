@@ -2,11 +2,11 @@ package com.note.fictionweb.action;
 
 import com.note.base.utils.JsonUtil;
 import com.note.base.utils.ObjectUtil;
-import com.note.entity.fiction.entity.SystemUserEntity;
-import com.note.provider.fiction.api.UserApiService;
-import com.note.provider.fiction.dto.request.SystemUserLoginReq;
-import com.note.provider.fiction.dto.request.SystemUserReq;
-import com.note.provider.fiction.dto.request.SystemUserUpdateExtReq;
+import com.note.fiction.dto.request.SystemUserLoginReq;
+import com.note.fiction.dto.request.SystemUserReq;
+import com.note.fiction.dto.request.SystemUserUpdateExtReq;
+import com.note.fiction.entity.SystemUserEntity;
+import com.note.fiction.proxy.UserServiceProxy;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,8 +27,8 @@ import static com.note.base.utils.JsonUtil.gson;
 @RequestMapping("user")
 public class UserAction {
 
-    @Resource(name="userApiService")
-    private UserApiService userApiService;
+    @Resource(name="fiction.service.userServiceProxy")
+    private UserServiceProxy userServiceProxy;
 
     /**
      * 注册
@@ -47,7 +47,7 @@ public class UserAction {
         systemUserReq.setEmail(email);
         systemUserReq.setLoginName(userName);
         systemUserReq.setPassword(password);
-        String result = userApiService.add(JsonUtil.toJson(systemUserReq));
+        String result = userServiceProxy.add(JsonUtil.toJson(systemUserReq));
         if("0".equals(result)){
             resultMap.put("status",0);
             return gson.toJson(resultMap);
@@ -71,7 +71,7 @@ public class UserAction {
         SystemUserLoginReq systemUserLoginReq = new SystemUserLoginReq();
         systemUserLoginReq.setUserName(loginUserName);
         systemUserLoginReq.setPassword(loginPassword);
-        String result =  userApiService.find(JsonUtil.toJson(systemUserLoginReq));
+        String result =  userServiceProxy.find(JsonUtil.toJson(systemUserLoginReq));
         SystemUserEntity systemUserEntity = JsonUtil.fromJson(result,SystemUserEntity.class);
         if(!ObjectUtil.isNull(systemUserEntity)){
             // 首次增加积分
@@ -79,7 +79,7 @@ public class UserAction {
             systemUserUpdateExtReq.setLoginName(loginUserName);
             systemUserUpdateExtReq.setChangeLevel(0);
             systemUserUpdateExtReq.setChangeScore(2);
-            userApiService.updateExtensionInfo(JsonUtil.toJson(systemUserUpdateExtReq));
+            userServiceProxy.updateExtensionInfo(JsonUtil.toJson(systemUserUpdateExtReq));
             session.setAttribute("user",systemUserEntity);
             resultMap.put("status",0);
             return gson.toJson(resultMap);

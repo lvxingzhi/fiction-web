@@ -1,15 +1,74 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd   http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
 
-    <dubbo:application name="fiction-web" ></dubbo:application>
-    <dubbo:registry address="multicast://224.5.6.7:1234" />
-    <dubbo:protocol name="dubbo" port="20880" />
-    <dubbo:consumer timeout="10000" />
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <property name="url"
+                  value="jdbc:mysql://139.199.84.115:3306/fiction?useSSL=true&amp;useUnicode=true&amp;characterEncoding=UTF-8"/>
+        <property name="username" value="root"/>
+        <property name="password" value="lvxingzhi"/>
+        <property name="initialSize" value="1"/> <!--启动时,初始化连接数-->
+        <property name="maxActive" value="20"/><!--最大连接池连接数-->
+        <property name="maxIdle" value="10"/><!--最大空闲的连接数-->
+        <property name="minIdle" value="5"/><!--最小空闲连接数-->
+        <property name="maxWait" value="6000"/><!--没有连接时的等待时间-->
 
-    <dubbo:reference id="fictionApiService" interface="com.note.provider.fiction.api.FictionApiService"></dubbo:reference>
-    <dubbo:reference id="userApiService" interface="com.note.provider.fiction.api.UserApiService"></dubbo:reference>
-    <dubbo:reference id="adminApiService" interface="com.note.provider.fiction.api.AdminApiService"></dubbo:reference>
+        <property name="removeAbandoned" value="true"/><!--是否自动回收超时连接-->
+        <property name="removeAbandonedTimeout" value="180"/><!--超时时间-->
+
+        <property name="testWhileIdle" value="true"/><!-- 定时对线程池中的链接进行validateObject校验-->
+        <property name="timeBetweenEvictionRunsMillis" value="20000"/> <!--上边的时间设置-->
+        <property name="testOnBorrow" value="false"/><!--就是在进行borrowObject进行处理时，对拿到的connection进行validateObject校验-->
+        <property name="testOnReturn"
+                  value="false"/><!--就是在进行returnObject对返回的connection进行validateObject校验，个人觉得对数据库连接池的管理意义不大-->
+        <property name="validationQuery" value="select 1 from dual"/><!--代表检查的sql-->
+        <property name="validationQueryTimeout"
+                  value="1"/><!--代表在执行检查时，通过statement设置，statement.setQueryTimeout(validationQueryTimeout)-->
+        <property name="numTestsPerEvictionRun" value="30"/><!--代表每次检查链接的数量，建议设置和maxActive一样大，这样每次可以有效检查所有的链接.-->
+    </bean>
+    <!-- ORM 异常交给Spring -->
+    <!--<bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />-->
+
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="mapperLocations" value="classpath*:com/note/fiction/dao/map/*.xml"/>
+        <property name="configLocation" value="classpath:mybatis-config.xml"/>
+    </bean>
+
+    <bean id="sessionContext" class="com.note.base.dao.SessionContext">
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+    </bean>
+
+    <!--<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">-->
+        <!--<property name="basePackage" value="com.note.fiction.dao" />-->
+        <!--<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>-->
+    <!--</bean>-->
+
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+    <tx:advice id="txAdvice" transaction-manager="transactionManager">
+        <tx:attributes>
+            <tx:method name="add*" rollback-for="java.lang.Exception" read-only="false" propagation="REQUIRED"/>
+            <tx:method name="delete*" rollback-for="java.lang.Exception" read-only="false" propagation="REQUIRED"/>
+            <tx:method name="del*" rollback-for="java.lang.Exception" read-only="false" propagation="REQUIRED"/>
+            <tx:method name="update*" rollback-for="java.lang.Exception" read-only="false" propagation="REQUIRED"/>
+            <tx:method name="insert*" rollback-for="java.lang.Exception" read-only="false" propagation="REQUIRED"/>
+            <tx:method name="create*" rollback-for="java.lang.Exception" read-only="false" propagation="REQUIRED"/>
+
+            <tx:method name="find*" read-only="true" propagation="SUPPORTS"/>
+            <tx:method name="get*" read-only="true" propagation="SUPPORTS"/>
+            <tx:method name="select*" read-only="true" propagation="SUPPORTS"/>
+            <tx:method name="query*" read-only="true" propagation="SUPPORTS"/>
+        </tx:attributes>
+    </tx:advice>
+
+    <aop:config>
+        <aop:pointcut id="txPoint" expression="execution(public * com.note.fiction.service.*.*(..))"/>
+        <aop:advisor advice-ref="txAdvice" pointcut-ref="txPoint"/>
+    </aop:config>
 
 </beans>

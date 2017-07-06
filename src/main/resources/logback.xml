@@ -38,15 +38,15 @@
         </encoder>
     </appender>
 
-    <logger name="com.note" level="DEBUG" additivity="true" />
-    <logger name="org" level="DEBUG" additivity="true" />
-    <logger name="com" level="DEBUG" additivity="true" />
-    <logger name="com.alibaba" level="DEBUG" additivity="true" />
-    <logger name="org.springframework" level="WARN" additivity="true" />
+    <!--<logger name="com.note" level="DEBUG" additivity="true" />-->
+    <!--<logger name="org" level="DEBUG" additivity="true" />-->
+    <!--<logger name="com" level="DEBUG" additivity="true" />-->
+    <!--<logger name="com.alibaba" level="DEBUG" additivity="true" />-->
+    <!--<logger name="org.springframework" level="WARN" additivity="true" />-->
 
 
     <root level="DEBUG" >
-        <appender-ref ref="ALL"/>
-        <!--<appender-ref ref="STDOUT"/>-->
+        <!--<appender-ref ref="ALL"/>-->
+        <appender-ref ref="STDOUT"/>
     </root>
 </configuration>

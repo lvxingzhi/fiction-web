@@ -1,9 +1,9 @@
 package com.note.fictionweb.action;
 
 import com.note.base.utils.JsonUtil;
+import com.note.fiction.proxy.AdminServiceProxy;
 import com.note.fictionweb.request.FictionAddRequest;
 import com.note.fictionweb.request.FictionChapterAddRequest;
-import com.note.provider.fiction.api.AdminApiService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,8 +20,8 @@ import java.sql.SQLException;
 @RequestMapping("adminManage")
 public class AdminManageAction {
 
-    @Resource(name = "adminApiService")
-    private AdminApiService adminApiService;
+    @Resource(name = "fiction.service.adminServiceProxy")
+    private AdminServiceProxy adminServiceProxy;
 
     /**
      * 跳转创建小说页
@@ -46,7 +46,7 @@ public class AdminManageAction {
     @RequestMapping(value="/createFiction", produces = "application/json;charset=UTF-8")
     @ResponseBody
     public String createFiction(FictionAddRequest fictionAddRequest,Model model) throws IOException, SQLException {
-        String result = adminApiService.createFiction(JsonUtil.toJson(fictionAddRequest));
+        String result = adminServiceProxy.createFiction(JsonUtil.toJson(fictionAddRequest));
         return result;
     }
 
@@ -72,7 +72,7 @@ public class AdminManageAction {
     @RequestMapping(value="/createFictionChapter", produces = "application/json;charset=UTF-8")
     @ResponseBody
    public String createFictionChapter(FictionChapterAddRequest fictionChapterAddRequest, Model model) throws IOException, SQLException {
-        String result = adminApiService.createFictionChapter(JsonUtil.toJson(fictionChapterAddRequest));
+        String result = adminServiceProxy.createFictionChapter(JsonUtil.toJson(fictionChapterAddRequest));
         return result;
     }
 

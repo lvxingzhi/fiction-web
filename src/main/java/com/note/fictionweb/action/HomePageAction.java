@@ -4,12 +4,12 @@ import com.google.common.reflect.TypeToken;
 import com.note.base.dto.PageDto;
 import com.note.base.utils.JsonUtil;
 import com.note.base.utils.ObjectUtil;
+import com.note.fiction.dto.request.FictionChapterInfoReq;
+import com.note.fiction.dto.request.FictionChapterReq;
+import com.note.fiction.dto.request.FictionFindOneReq;
+import com.note.fiction.dto.response.*;
+import com.note.fiction.proxy.FictionServiceProxy;
 import com.note.fictionweb.logic.FictionLogic;
-import com.note.provider.fiction.api.FictionApiService;
-import com.note.provider.fiction.dto.request.FictionChapterInfoReq;
-import com.note.provider.fiction.dto.request.FictionChapterReq;
-import com.note.provider.fiction.dto.request.FictionFindOneReq;
-import com.note.provider.fiction.dto.response.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -32,8 +32,8 @@ import java.util.List;
 public class HomePageAction {
     Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    @Resource(name = "fictionApiService")
-    private FictionApiService fictionApiService;
+    @Resource(name = "fiction.service.fictionServiceProxy")
+    private FictionServiceProxy fictionServiceProxy;
 
     @Resource(name = "web.logic.fictionLogic")
     private FictionLogic fictionLogic;
@@ -117,13 +117,13 @@ public class HomePageAction {
     public String infoPage(String fictionCode, Model model) throws IOException, SQLException {
         FictionFindOneReq fictionFindOneReq = new FictionFindOneReq();
         fictionFindOneReq.setFictionCode(fictionCode);
-        String infoJson = fictionApiService.findFictionInfo(JsonUtil.toJson(fictionFindOneReq));
+        String infoJson = fictionServiceProxy.findFictionInfo(JsonUtil.toJson(fictionFindOneReq));
         FictionFindOneResp fictionFindOneResp = JsonUtil.fromJson(infoJson, new TypeToken<FictionFindOneResp>() {
         }.getType());
         FictionChapterReq fictionChapterReq = new FictionChapterReq();
         fictionChapterReq.setFictionCode(fictionCode);
         fictionChapterReq.setSize(PageDto.MAX);
-        String chapterListJson = fictionApiService.findFictionChapters(JsonUtil.toJson(fictionChapterReq));
+        String chapterListJson = fictionServiceProxy.findFictionChapters(JsonUtil.toJson(fictionChapterReq));
         List<FictionChapterResp> chapterList = JsonUtil.fromJson(chapterListJson, new TypeToken<List<FictionChapterResp>>() {
         }.getType());
         model.addAttribute("fictionInfo", fictionFindOneResp);
@@ -144,14 +144,14 @@ public class HomePageAction {
     public String contentPage(String chapterCode, Model model) throws IOException, SQLException {
         FictionChapterInfoReq fictionChapterInfoReq = new FictionChapterInfoReq();
         fictionChapterInfoReq.setChapterCode(chapterCode);
-        String chapterInfo = fictionApiService.findChapterInfo(JsonUtil.toJson(fictionChapterInfoReq));
+        String chapterInfo = fictionServiceProxy.findChapterInfo(JsonUtil.toJson(fictionChapterInfoReq));
         FictionChapterInfoResp fictionChapterInfoResp = JsonUtil.fromJson(chapterInfo, FictionChapterInfoResp.class);
         fictionChapterInfoResp.setChapterContent("<p>" + fictionChapterInfoResp.getChapterContent().replaceAll("\r\n\r\n", "</p><p>").replaceAll("\r\n", "</p><p>").replaceAll("\n", "</p><p>").replaceAll("\r", "</p><p>").replaceAll(" ", "&nbsp;") + "</p>");
         model.addAttribute("chapterInfo", fictionChapterInfoResp);
 
         FictionFindOneReq fictionFindOneReq = new FictionFindOneReq();
         fictionFindOneReq.setFictionCode(fictionChapterInfoResp.getFictionCode());
-        String infoJson = fictionApiService.findFictionInfo(JsonUtil.toJson(fictionFindOneReq));
+        String infoJson = fictionServiceProxy.findFictionInfo(JsonUtil.toJson(fictionFindOneReq));
         FictionFindOneResp fictionFindOneResp = JsonUtil.fromJson(infoJson, new TypeToken<FictionFindOneResp>() {
         }.getType());
         model.addAttribute("fictionInfo", fictionFindOneResp);
