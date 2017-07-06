@@ -50,8 +50,8 @@
         <!-- 必须要有的，使用这个配置链接数据库
             @TODO:是否可以扩展
          -->
-        <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://localhost:3306/fiction"
-                        userId="note" password="note">
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://139.199.84.115:3306/fiction"
+                        userId="root" password="lvxingzhi">
             <!-- 这里面可以设置property属性，每一个property属性都设置到配置的Driver上 -->
         </jdbcConnection>
 
@@ -171,47 +171,55 @@
 
             注意，table里面很多参数都是对javaModelGenerator，context等元素的默认属性的一个复写；
          -->
-        <table tableName="fiction_chapter">
-            <property name="constructorBased" value="false"/>
-            <property name="ignoreQualifiersAtRuntime" value="false"/>
-            <property name="immutable" value="false"/>
-            <property name="modelOnly" value="false"/>
-            <property name="useActualColumnNames" value="false"/>
-        </table>
-        <table tableName="fiction_chapter_extention">
-            <property name="constructorBased" value="false"/>
-            <property name="ignoreQualifiersAtRuntime" value="false"/>
-            <property name="immutable" value="false"/>
-            <property name="modelOnly" value="false"/>
-            <property name="useActualColumnNames" value="false"/>
-        </table>
-        <table tableName="fiction_extention">
-            <property name="constructorBased" value="false"/>
-            <property name="ignoreQualifiersAtRuntime" value="false"/>
-            <property name="immutable" value="false"/>
-            <property name="modelOnly" value="false"/>
-            <property name="useActualColumnNames" value="false"/>
-        </table>
-        <table tableName="fiction_rank">
-            <property name="constructorBased" value="false"/>
-            <property name="ignoreQualifiersAtRuntime" value="false"/>
-            <property name="immutable" value="false"/>
-            <property name="modelOnly" value="false"/>
-            <property name="useActualColumnNames" value="false"/>
-        </table>
-        <table tableName="system_base_const">
-            <property name="constructorBased" value="false"/>
-            <property name="ignoreQualifiersAtRuntime" value="false"/>
-            <property name="immutable" value="false"/>
-            <property name="modelOnly" value="false"/>
-            <property name="useActualColumnNames" value="false"/>
-        </table>
-        <table tableName="system_user">
-            <property name="constructorBased" value="false"/>
-            <property name="ignoreQualifiersAtRuntime" value="false"/>
-            <property name="immutable" value="false"/>
-            <property name="modelOnly" value="false"/>
-            <property name="useActualColumnNames" value="false"/>
+        <!--<table tableName="fiction_chapter">-->
+            <!--<property name="constructorBased" value="false"/>-->
+            <!--<property name="ignoreQualifiersAtRuntime" value="false"/>-->
+            <!--<property name="immutable" value="false"/>-->
+            <!--<property name="modelOnly" value="false"/>-->
+            <!--<property name="useActualColumnNames" value="false"/>-->
+        <!--</table>-->
+        <!--<table tableName="fiction_chapter_extention">-->
+            <!--<property name="constructorBased" value="false"/>-->
+            <!--<property name="ignoreQualifiersAtRuntime" value="false"/>-->
+            <!--<property name="immutable" value="false"/>-->
+            <!--<property name="modelOnly" value="false"/>-->
+            <!--<property name="useActualColumnNames" value="false"/>-->
+        <!--</table>-->
+        <!--<table tableName="fiction_extention">-->
+            <!--<property name="constructorBased" value="false"/>-->
+            <!--<property name="ignoreQualifiersAtRuntime" value="false"/>-->
+            <!--<property name="immutable" value="false"/>-->
+            <!--<property name="modelOnly" value="false"/>-->
+            <!--<property name="useActualColumnNames" value="false"/>-->
+        <!--</table>-->
+        <!--<table tableName="fiction_rank">-->
+            <!--<property name="constructorBased" value="false"/>-->
+            <!--<property name="ignoreQualifiersAtRuntime" value="false"/>-->
+            <!--<property name="immutable" value="false"/>-->
+            <!--<property name="modelOnly" value="false"/>-->
+            <!--<property name="useActualColumnNames" value="false"/>-->
+        <!--</table>-->
+        <!--<table tableName="system_base_const">-->
+            <!--<property name="constructorBased" value="false"/>-->
+            <!--<property name="ignoreQualifiersAtRuntime" value="false"/>-->
+            <!--<property name="immutable" value="false"/>-->
+            <!--<property name="modelOnly" value="false"/>-->
+            <!--<property name="useActualColumnNames" value="false"/>-->
+        <!--</table>-->
+        <!--<table tableName="system_user">-->
+            <!--<property name="constructorBased" value="false"/>-->
+            <!--<property name="ignoreQualifiersAtRuntime" value="false"/>-->
+            <!--<property name="immutable" value="false"/>-->
+            <!--<property name="modelOnly" value="false"/>-->
+            <!--<property name="useActualColumnNames" value="false"/>-->
+        <!--</table>-->
+
+        <table tableName="access_log">
+        <property name="constructorBased" value="false"/>
+        <property name="ignoreQualifiersAtRuntime" value="false"/>
+        <property name="immutable" value="false"/>
+        <property name="modelOnly" value="false"/>
+        <property name="useActualColumnNames" value="false"/>
         </table>
 
     </context>

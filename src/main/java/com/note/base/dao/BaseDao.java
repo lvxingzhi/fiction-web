@@ -1,5 +1,7 @@
 package com.note.base.dao;
 
+import javax.annotation.Resource;
+
 /**
  * <p>TODO </p>
  * <p>
@@ -16,8 +18,11 @@ package com.note.base.dao;
  */
 public abstract class BaseDao {
 
-    public abstract SessionContext getSessionContext();
+    @Resource(name ="sessionContext")
+    private SessionContext sessionContext;
 
-
+    public SessionContext getSessionContext() {
+        return sessionContext;
+    }
 
 }
