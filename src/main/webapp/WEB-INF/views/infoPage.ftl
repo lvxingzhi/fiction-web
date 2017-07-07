@@ -9,8 +9,7 @@
                             <div class="row " id="hotTableContent">
                                 <div class="row">
                                     <div class="col-md-4">
-                                        <a ><img class="infoImage"
-                                                                                                     src="${fictionInfo.coverPhoto}"></a>
+                                        <a><img class="infoImage" src="${fictionInfo.coverPhoto}"></a>
                                     </div>
                                     <div class="col-md-8">
                                         <h1>${fictionInfo.title}
@@ -55,29 +54,29 @@
             </div>
         </div>
     </div>
-<div class="row ">
-<div class="panel ">
-    <div class="panel-heading title"><h3>作品目录</h3></div>
-<div class="panel-body">
-    <div class="col-md-1">
+    <div class="row ">
+        <div class="panel ">
+            <div class="panel-heading title"><h3>作品目录</h3></div>
+            <div class="panel-body">
+                <div class="col-md-1">
 
-    </div>
-    <div class="col-md-11">
-        <#if chapterList??>
-            <#list chapterList as item>
-                <div class="col-md-4">
-                    <p class="text-left "><a class="pointer-style"
-                                               onclick="showChapterInfo('${item.logicCode}');">${item.chapterName}</a>
-                    </p>
                 </div>
-            </#list>
-        </#if>
+                <div class="col-md-11">
+                <#if chapterList??>
+                    <#list chapterList as item>
+                        <div class="col-md-4">
+                            <p class="text-left "><a class="pointer-style"
+                                                     onclick="showChapterInfo('${item.logicCode}');">${item.chapterName}</a>
+                            </p>
+                        </div>
+                    </#list>
+                </#if>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
-</div>
-</div>
-</div>
-    <#include "/common/foot.ftl"/>
+<#include "/common/foot.ftl"/>
 <script src="/resources/plugin/jquery/jquery.js"></script>
 <script src="/resources/plugin/bootstrap/js/bootstrap.js"></script>
 <#--<script src="/resources/plugin/bootstrap/js/npm.js"></script>-->
