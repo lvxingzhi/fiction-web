@@ -53,6 +53,7 @@
     <tx:advice id="txAdvice" transaction-manager="transactionManager">
         <tx:attributes>
             <tx:method name="add*" rollback-for="java.lang.Exception" read-only="false" propagation="REQUIRED"/>
+            <tx:method name="save*" rollback-for="java.lang.Exception" read-only="false" propagation="REQUIRED"/>
             <tx:method name="delete*" rollback-for="java.lang.Exception" read-only="false" propagation="REQUIRED"/>
             <tx:method name="del*" rollback-for="java.lang.Exception" read-only="false" propagation="REQUIRED"/>
             <tx:method name="update*" rollback-for="java.lang.Exception" read-only="false" propagation="REQUIRED"/>
