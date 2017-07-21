@@ -101,6 +101,10 @@ public class FileParseUtil {
                 String shortDesc = s.substring(s.indexOf("<shortDesc>") + 12, s.indexOf("</shortDesc>"));
                 baseDto.setShortDesc(shortDesc);
             }
+            if (s.contains("<fullDesc>")) {
+                String fullDesc = s.substring(s.indexOf("<fullDesc>") + 12, s.indexOf("</fullDesc>"));
+                baseDto.setShortDesc(fullDesc);
+            }
             if (s.contains("<type>")) {
                 String type = s.substring(s.indexOf("<type>") + 6, s.indexOf("</type>"));
                 baseDto.setType(type);
@@ -113,7 +117,19 @@ public class FileParseUtil {
         return baseDto;
     }
 
+    public static Map<String,Object> access(FileParseDto fileParseDto) throws IOException {
+        Path path = Paths.get(fileParseDto.getPath(), fileParseDto.getFileName()); //获取文件对象
+        List<String> list = Files.readAllLines(path, Charset.forName(fileParseDto.getEncode()));
+        Map<String,Object> resultMap = new HashMap<>();
+        BaseDto baseDto = FileParseUtil.parseBase(list);
+        List<ChapterDto> chapterDtoList = FileParseUtil.parseChapters(list);
+        resultMap.put(BASE_DTO,baseDto);
+        resultMap.put(CHAPTER_DTO_LIST,chapterDtoList);
+        return resultMap;
+    }
+
     /**
+     * 根据xml格式解析章节
      *
      * <chapterTitle></chapterTitle>
      * <chapterContent></chapterContent>
@@ -157,15 +173,80 @@ public class FileParseUtil {
         return chapterDtoList;
     }
 
-    public static Map<String,Object> access(FileParseDto fileParseDto) throws IOException {
+
+
+    public static Map<String,Object> accessAuto(FileParseDto fileParseDto) throws IOException {
         Path path = Paths.get(fileParseDto.getPath(), fileParseDto.getFileName()); //获取文件对象
         List<String> list = Files.readAllLines(path, Charset.forName(fileParseDto.getEncode()));
         Map<String,Object> resultMap = new HashMap<>();
         BaseDto baseDto = FileParseUtil.parseBase(list);
-        List<ChapterDto> chapterDtoList = FileParseUtil.parseChapters(list);
+        List<ChapterDto> chapterDtoList = FileParseUtil.autoParseChapters(list);
         resultMap.put(BASE_DTO,baseDto);
         resultMap.put(CHAPTER_DTO_LIST,chapterDtoList);
         return resultMap;
+    }
+
+    /**
+     * 自动解析文章章节
+     *
+     * @return
+     */
+    public static List<ChapterDto> autoParseChapters(List<String> list){
+        List<ChapterDto> chapterDtoList = new ArrayList<>();
+        ChapterDto chapterDto = null;
+        for (int i=0;i<list.size();i++) {
+            String s = list.get(i);
+            if (isCountMatchChapterTitle(s)&&isMatchChapterTitle(s)) {
+                chapterDto = new ChapterDto();
+                chapterDtoList.add(chapterDto);
+                String chapterTitle = s.trim();
+                chapterDto.setTitle(chapterTitle);
+                String chapterContent = "";
+                for(i+=1;i<list.size();i++){
+                    String sChild = list.get(i);
+                    if (!isCountMatchChapterTitle(sChild)||!isMatchChapterTitle(sChild)) {
+                        chapterContent += sChild;
+                    }else{
+                        i--;
+                        break;
+                    }
+                }
+                chapterDto.setContent(chapterContent);
+                chapterDto.setTotal(chapterContent.length());
+                chapterDto.setIndex(chapterDtoList.size());
+
+            }
+
+
+
+        }
+        return chapterDtoList;
+    }
+
+    public static boolean isMatchChapterTitle(String s){
+        String content = s.trim();
+        if(content.matches("^第{1,6}章.*$")){
+            return true;
+        }
+        if(content.matches("^第{1,6}节.*$")){
+            return true;
+        }
+        if(content.matches("^☆.*")){
+            return true;
+        }
+        return false;
+    }
+
+    public static boolean isCountMatchChapterTitle(String content){
+        if(content.trim().length()<30){
+            return true;
+        }
+        return false;
+    }
+
+    public static void main(String[] args) {
+        boolean b = "第一百零三章".matches("^第.*章$");
+        System.out.println( b);
     }
 
 }

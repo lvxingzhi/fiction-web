@@ -31,21 +31,23 @@ import java.util.Map;
  * @date 2017/3/21
  * @since 1.0
  */
-public class MainFile {
+public class MainAutoFile {
 
     public static void main(String[] args) throws IOException, SQLException {
-        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(new String[] {"classpath:spring/applicationContext.xml"});
+        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(new String[] {"classpath:applicationContext.xml"});
         context.start();
         System.out.println("#########: 开始");
         FileParseDto fileParseDto = new FileParseDto();
-        fileParseDto.setPath("F:/");
-        fileParseDto.setFileName("新建文本文档.txt");
+        fileParseDto.setPath("H:/temp/");
+        fileParseDto.setFileName("美人记.txt");
         fileParseDto.setEncode("UTF-8");
         System.out.println("#########解析小说: "+fileParseDto.toString());
 
-        Map<String,Object> resultMap = FileParseUtil.access(fileParseDto);
+        Map<String,Object> resultMap = FileParseUtil.accessAuto(fileParseDto);
         BaseDto baseDto = (BaseDto) resultMap.get(FileParseUtil.BASE_DTO);
         List<ChapterDto> chapterDtoList = (List<ChapterDto>)resultMap.get(FileParseUtil.CHAPTER_DTO_LIST);
+        chapterDtoList.forEach(s->{
+            System.out.println(s.getTitle());});
 
         AdminServiceProxy adminServiceProxy = (AdminServiceProxy) context.getBean("fiction.service.adminServiceProxy");
         FictionBaseService fictionBaseService = (FictionBaseService) context.getBean("fiction.service.fictionBaseService");
@@ -55,7 +57,7 @@ public class MainFile {
         fictionAddReq.setCoverPhoto(baseDto.getPhoto());
         fictionAddReq.setTypeCode(baseDto.getType());
         fictionAddReq.setAuthorName(baseDto.getAuthor());
-        fictionAddReq.setFullDesc(baseDto.getShortDesc());
+        fictionAddReq.setFullDesc(baseDto.getFullDesc());
 
         FictionSearchReq fictionSearchReq = new FictionSearchReq();
         fictionSearchReq.setTitle(baseDto.getTitle());

@@ -19,6 +19,7 @@ public class BaseDto {
     private String title;
     private String author;
     private String shortDesc;
+    private String fullDesc;
     private String type;
     private String photo;
 
@@ -60,6 +61,14 @@ public class BaseDto {
 
     public void setPhoto(String photo) {
         this.photo = photo;
+    }
+
+    public String getFullDesc() {
+        return fullDesc;
+    }
+
+    public void setFullDesc(String fullDesc) {
+        this.fullDesc = fullDesc;
     }
 
     @Override
