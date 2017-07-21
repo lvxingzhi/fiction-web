@@ -205,7 +205,7 @@ public class FileParseUtil {
                 for(i+=1;i<list.size();i++){
                     String sChild = list.get(i);
                     if (!isCountMatchChapterTitle(sChild)||!isMatchChapterTitle(sChild)) {
-                        chapterContent += sChild;
+                        chapterContent += ("\n"+sChild);
                     }else{
                         i--;
                         break;
