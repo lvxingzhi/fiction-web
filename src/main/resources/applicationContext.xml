@@ -8,7 +8,7 @@
         <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
         <property name="url"
                   value="jdbc:mysql://139.199.84.115:3306/fiction?useSSL=true&amp;useUnicode=true&amp;characterEncoding=UTF-8"/>
-        <property name="username" value="root"/>
+        <property name="username" value="admin"/>
         <property name="password" value="lvxingzhi"/>
         <property name="initialSize" value="1"/> <!--启动时,初始化连接数-->
         <property name="maxActive" value="20"/><!--最大连接池连接数-->
