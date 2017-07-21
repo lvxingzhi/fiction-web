@@ -81,6 +81,9 @@ public class FictionServiceProxy{
         FictionExtentionEntity fictionExtentionEntity = fictionExtentionService.findByFictionCode(result.getLogicCode());
         fictionExtentionEntity.setFictionViews(fictionExtentionEntity.getFictionViews()+1);
         fictionExtentionService.updateStatistics(fictionExtentionEntity);
+        if(result.getFullDesc().length()>100){
+            result.setFullDesc(result.getFullDesc().substring(0,100)+"……");
+        }
         return JsonUtil.toJson(result);
     }
 
