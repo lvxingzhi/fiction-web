@@ -75,9 +75,17 @@ public class AdminServiceProxy {
         return "0";
     }
 
+    public String deleteFiction(){
+        return "0";
+    }
+
     private FictionBaseEntity transFictionBaseEntity(FictionAddReq fictionAddReq) {
         FictionBaseEntity fictionBaseEntity = new FictionBaseEntity();
-        fictionBaseEntity.setLogicCode(UUIDGenerator.uuid());
+        if(ObjectUtil.notNull(fictionAddReq.getLogicCode())){
+            fictionBaseEntity.setLogicCode(fictionAddReq.getLogicCode());
+        }else{
+            fictionBaseEntity.setLogicCode(UUIDGenerator.uuid());
+        }
         fictionBaseEntity.setTitle(fictionAddReq.getTitle());
         fictionBaseEntity.setShortDesc(fictionAddReq.getShortDesc());
         fictionBaseEntity.setCoverPhoto(fictionAddReq.getCoverPhoto());

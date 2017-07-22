@@ -93,4 +93,14 @@ public class FictionBaseService {
         return 1;
     }
 
+    public int deleteFiction(String fictionCode) {
+        fictionChapterExtentionDao.deleteByFictionCode(fictionCode);
+        fictionChapterDao.deleteByFictionCode(fictionCode);
+        fictionRankDao.deleteByFictionCode(fictionCode);
+        fictionBaseDao.deleteByLogicCode(fictionCode);
+        fictionExtentionDao.deleteByFictionCode(fictionCode);
+        return 1;
+    }
+
+
 }

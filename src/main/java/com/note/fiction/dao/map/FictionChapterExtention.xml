@@ -92,4 +92,9 @@
     where chapter_code = #{chapterCode,jdbcType=VARCHAR}
   </update>
 
+  <delete id="deleteByFictionCode" parameterType="java.lang.String">
+    delete from fiction_chapter_extention where
+    chapter_code in (select logic_code from fiction_chapter where fiction_code=#{fictionCode});
+  </delete>
+
 </mapper>

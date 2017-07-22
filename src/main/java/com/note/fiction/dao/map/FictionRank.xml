@@ -95,4 +95,10 @@
       </otherwise>
     </choose>
   </select>
+
+  <delete id="deleteByFictionCode" parameterType="java.lang.String">
+    delete from fiction_rank where fiction_code=#{fictionCode};
+  </delete>
+
+
 </mapper>

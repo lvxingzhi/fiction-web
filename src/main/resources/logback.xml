@@ -45,7 +45,7 @@
     <!--<logger name="org.springframework" level="WARN" additivity="true" />-->
 
 
-    <root level="DEBUG" >
+    <root level="ERROR" >
         <!--<appender-ref ref="ALL"/>-->
         <appender-ref ref="STDOUT"/>
     </root>

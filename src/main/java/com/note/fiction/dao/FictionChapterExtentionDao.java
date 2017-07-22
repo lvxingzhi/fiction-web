@@ -15,4 +15,8 @@ public class FictionChapterExtentionDao extends BaseDao {
         return getSessionContext().update(this.getClass().getName()+".updatePreAndNext",fictionChapterExtentionEntity);
     }
 
+    public int deleteByFictionCode(String fictionCode){
+        return getSessionContext().delete(this.getClass().getName()+".deleteByFictionCode",fictionCode);
+    }
+
 }

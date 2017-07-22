@@ -2,13 +2,21 @@ package com.note.fiction.dto.request;
 
 
 public class FictionAddReq {
-
+    private String logicCode;
     private String title;
     private String shortDesc;
     private String coverPhoto;
     private String typeCode;
     private String authorName;
     private String fullDesc;
+
+    public String getLogicCode() {
+        return logicCode;
+    }
+
+    public void setLogicCode(String logicCode) {
+        this.logicCode = logicCode;
+    }
 
     public String getFullDesc() {
         return fullDesc;

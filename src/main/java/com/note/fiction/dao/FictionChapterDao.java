@@ -34,4 +34,8 @@ public class FictionChapterDao extends BaseDao {
         return getSessionContext().selectList(this.getClass().getName()+".findByCondition",fictionChapterEntity,rowBounds);
     }
 
+    public int deleteByFictionCode(String fictionCode){
+        return getSessionContext().delete(this.getClass().getName()+".deleteByFictionCode",fictionCode);
+    }
+
 }

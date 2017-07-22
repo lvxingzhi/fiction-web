@@ -50,5 +50,9 @@ public class SessionContext extends SqlSessionDaoSupport {
         return this.getSqlSession().update(name,E);
     }
 
+    public <E> int delete(String name,E E){
+        return this.getSqlSession().delete(name,E);
+    }
+
 
 }

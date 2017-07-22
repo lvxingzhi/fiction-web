@@ -19,4 +19,8 @@ public class FictionExtentionDao extends BaseDao {
         return getSessionContext().selectOne(this.getClass().getName()+".selectByFictionCode",fictionCode);
     }
 
+    public int deleteByFictionCode(String fictionCode){
+        return getSessionContext().delete(this.getClass().getName()+".deleteByFictionCode",fictionCode);
+    }
+
 }

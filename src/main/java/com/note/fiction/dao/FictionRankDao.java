@@ -22,4 +22,8 @@ public class FictionRankDao  extends BaseDao {
         return getSessionContext().insert(this.getClass().getName()+".insert",fictionRankEntity);
     }
 
+    public int deleteByFictionCode(String fictionCode){
+        return getSessionContext().delete(this.getClass().getName()+".deleteByFictionCode",fictionCode);
+    }
+
 }

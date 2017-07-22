@@ -14,7 +14,7 @@ package com.note.base.exception;
  * @date 2017/5/9
  * @since 1.0
  */
-public class SystemException extends Throwable {
+public class SystemException extends RuntimeException {
 
     public SystemException() {
        super();

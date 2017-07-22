@@ -40,4 +40,8 @@ public class FictionBaseDao extends BaseDao {
         return getSessionContext().insert(this.getClass().getName()+".insert",entity);
     }
 
+    public int deleteByLogicCode(String fictionCode){
+        return getSessionContext().delete(this.getClass().getName()+".deleteByLogicCode",fictionCode);
+    }
+
 }

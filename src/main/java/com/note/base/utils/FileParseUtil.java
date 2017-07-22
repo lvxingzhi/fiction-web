@@ -102,8 +102,8 @@ public class FileParseUtil {
                 baseDto.setShortDesc(shortDesc);
             }
             if (s.contains("<fullDesc>")) {
-                String fullDesc = s.substring(s.indexOf("<fullDesc>") + 12, s.indexOf("</fullDesc>"));
-                baseDto.setShortDesc(fullDesc);
+                String fullDesc = s.substring(s.indexOf("<fullDesc>") + 10, s.indexOf("</fullDesc>"));
+                baseDto.setFullDesc(fullDesc);
             }
             if (s.contains("<type>")) {
                 String type = s.substring(s.indexOf("<type>") + 6, s.indexOf("</type>"));
@@ -225,20 +225,35 @@ public class FileParseUtil {
 
     public static boolean isMatchChapterTitle(String s){
         String content = s.trim();
-        if(content.matches("^第{1,6}章.*$")){
+        if(content.matches("^第[\\s\\S]{1,6}章[\\s\\S]*$")){
             return true;
         }
-        if(content.matches("^第{1,6}节.*$")){
+        if(content.matches("^第[\\s\\S]{1,6}节[\\s\\S]*$")){
             return true;
         }
-        if(content.matches("^☆.*")){
+        if(content.matches("^☆[\\s\\S]*")){
             return true;
         }
+        if(content.matches("^番外[\\s\\S]*")){
+            return true;
+        }
+        if(content.matches("^少时歌[\\s\\S]*$")){
+            return true;
+        }
+        if(content.matches("^东风起[\\s\\S]*$")){
+            return true;
+        }
+
+
+        if(content.matches("^[\\s\\S]*更新完毕[\\s\\S]*")){
+            return false;
+        }
+
         return false;
     }
 
     public static boolean isCountMatchChapterTitle(String content){
-        if(content.trim().length()<30){
+        if(content.trim().length()<40){
             return true;
         }
         return false;

@@ -31,16 +31,16 @@
         <result column="type_name" property="typeName"/>
         <result column="create_time" property="createTime"/>
         <result column="create_user_code" property="createUserCode"/>
-        <result column="full_desc" jdbcType="VARCHAR" property="fullDesc" />
-        <result column="total_chapter" jdbcType="INTEGER" property="totalChapter" />
-        <result column="total_word" jdbcType="INTEGER" property="totalWord" />
-        <result column="last_update_time" jdbcType="TIMESTAMP" property="lastUpdateTime" />
-        <result column="level" jdbcType="INTEGER" property="level" />
-        <result column="fiction_views" jdbcType="INTEGER" property="fictionViews" />
-        <result column="fiction_score" jdbcType="DOUBLE" property="fictionScore" />
-        <result column="fiction_score_num" jdbcType="INTEGER" property="fictionScoreNum" />
-        <result column="last_chapter_name" jdbcType="VARCHAR" property="lastChapterName" />
-        <result column="last_chapter_code" jdbcType="VARCHAR" property="lastChapterCode" />
+        <result column="full_desc" jdbcType="VARCHAR" property="fullDesc"/>
+        <result column="total_chapter" jdbcType="INTEGER" property="totalChapter"/>
+        <result column="total_word" jdbcType="INTEGER" property="totalWord"/>
+        <result column="last_update_time" jdbcType="TIMESTAMP" property="lastUpdateTime"/>
+        <result column="level" jdbcType="INTEGER" property="level"/>
+        <result column="fiction_views" jdbcType="INTEGER" property="fictionViews"/>
+        <result column="fiction_score" jdbcType="DOUBLE" property="fictionScore"/>
+        <result column="fiction_score_num" jdbcType="INTEGER" property="fictionScoreNum"/>
+        <result column="last_chapter_name" jdbcType="VARCHAR" property="lastChapterName"/>
+        <result column="last_chapter_code" jdbcType="VARCHAR" property="lastChapterCode"/>
     </resultMap>
 
     <resultMap id="oneResult" type="com.note.fiction.dto.response.FictionFindOneResp">
@@ -55,28 +55,28 @@
         <result column="type_name" property="typeName"/>
         <result column="create_time" property="createTime"/>
         <result column="create_user_code" property="createUserCode"/>
-        <result column="full_desc" jdbcType="VARCHAR" property="fullDesc" />
-        <result column="total_chapter" jdbcType="INTEGER" property="totalChapter" />
-        <result column="total_word" jdbcType="INTEGER" property="totalWord" />
-        <result column="last_update_time" jdbcType="TIMESTAMP" property="lastUpdateTime" />
-        <result column="level" jdbcType="INTEGER" property="level" />
-        <result column="fiction_views" jdbcType="INTEGER" property="fictionViews" />
-        <result column="fiction_score_num" jdbcType="INTEGER" property="fictionScoreNum" />
-        <result column="fiction_score" jdbcType="DOUBLE" property="fictionScore" />
-        <result column="last_chapter_name" jdbcType="VARCHAR" property="lastChapterName" />
-        <result column="last_chapter_code" jdbcType="VARCHAR" property="lastChapterCode" />
+        <result column="full_desc" jdbcType="VARCHAR" property="fullDesc"/>
+        <result column="total_chapter" jdbcType="INTEGER" property="totalChapter"/>
+        <result column="total_word" jdbcType="INTEGER" property="totalWord"/>
+        <result column="last_update_time" jdbcType="TIMESTAMP" property="lastUpdateTime"/>
+        <result column="level" jdbcType="INTEGER" property="level"/>
+        <result column="fiction_views" jdbcType="INTEGER" property="fictionViews"/>
+        <result column="fiction_score_num" jdbcType="INTEGER" property="fictionScoreNum"/>
+        <result column="fiction_score" jdbcType="DOUBLE" property="fictionScore"/>
+        <result column="last_chapter_name" jdbcType="VARCHAR" property="lastChapterName"/>
+        <result column="last_chapter_code" jdbcType="VARCHAR" property="lastChapterCode"/>
     </resultMap>
 
     <select id="selectByCondition" parameterType="map" resultMap="result">
         select
         cid,logic_code,title,short_desc,fiction_status,cover_photo,author_code,author_name,type_code,type_name,create_time,create_user_code,modify_time,
         modify_user_code
-         from fiction_base
-         <where>
-             <if test="name!=null and name!=''" >
-                 title like concat(#{name},'%')
-             </if>
-         </where>
+        from fiction_base
+        <where>
+            <if test="name!=null and name!=''">
+                title like concat(#{name},'%')
+            </if>
+        </where>
 
     </select>
 
@@ -89,26 +89,29 @@
         left join fiction_extention fext on fb.logic_code=fext.fiction_code
         <where>
             1=1
-            <if test="searchContent.title!=null and searchContent.title!=''" >
+            <if test="searchContent.title!=null and searchContent.title!=''">
                 and fb.title like concat(#{searchContent.title},'%')
             </if>
-            <if test="searchContent.authorName!=null and searchContent.authorName!=''" >
+            <if test="searchContent.authorName!=null and searchContent.authorName!=''">
                 and fb.author_name = #{authorName}
             </if>
-            <if test="searchContent.authorCode!=null and searchContent.authorCode!=''" >
+            <if test="searchContent.authorCode!=null and searchContent.authorCode!=''">
                 and fb.author_code = #{searchContent.authorCode}
             </if>
-            <if test="searchContent.typeCode!=null and searchContent.typeCode!=''" >
+            <if test="searchContent.typeCode!=null and searchContent.typeCode!=''">
                 and fb.type_code = #{searchContent.typeCode}
             </if>
-            <if test="searchContent.fictionStatus!=null and searchContent.fictionStatus!=''" >
+            <if test="searchContent.fictionStatus!=null and searchContent.fictionStatus!=''">
                 and fb.fiction_status = #{searchContent.fictionStatus}
             </if>
             and fb.is_delete = 0
         </where>
         <choose>
-            <when test="searchContent.orderBy!=null and searchContent.orderBy!=''" >
-                order by #{searchContent.orderBy} <if test="searchContent.orderByType!=null and searchContent.orderByType!='' and (searchContent.orderByType='desc' or searchContent.orderByType='asc')">#{searchContent.orderByType}</if>
+            <when test="searchContent.orderBy!=null and searchContent.orderBy!=''">
+                order by #{searchContent.orderBy}
+                <if test="searchContent.orderByType!=null and searchContent.orderByType!='' and (searchContent.orderByType='desc' or searchContent.orderByType='asc')">
+                    #{searchContent.orderByType}
+                </if>
             </when>
             <otherwise>
                 order by create_time desc
@@ -126,26 +129,29 @@
         left join fiction_extention fext on fb.logic_code=fext.fiction_code
         <where>
             1=1
-            <if test="searchContent.title!=null and searchContent.title!=''" >
+            <if test="searchContent.title!=null and searchContent.title!=''">
                 and fb.title like concat(#{searchContent.title},'%')
             </if>
-            <if test="searchContent.authorName!=null and searchContent.authorName!=''" >
+            <if test="searchContent.authorName!=null and searchContent.authorName!=''">
                 and fb.author_name = #{authorName}
             </if>
-            <if test="searchContent.authorCode!=null and searchContent.authorCode!=''" >
+            <if test="searchContent.authorCode!=null and searchContent.authorCode!=''">
                 and fb.author_code = #{searchContent.authorCode}
             </if>
-            <if test="searchContent.typeCode!=null and searchContent.typeCode!=''" >
+            <if test="searchContent.typeCode!=null and searchContent.typeCode!=''">
                 and fb.type_code = #{searchContent.typeCode}
             </if>
-            <if test="searchContent.fictionStatus!=null and searchContent.fictionStatus!=''" >
+            <if test="searchContent.fictionStatus!=null and searchContent.fictionStatus!=''">
                 and fb.fiction_status = #{searchContent.fictionStatus}
             </if>
             and fb.is_delete = 0
         </where>
         <choose>
-            <when test="searchContent.orderBy!=null and searchContent.orderBy!=''" >
-                order by #{searchContent.orderBy} <if test="searchContent.orderByType!=null and searchContent.orderByType!='' and (searchContent.orderByType='desc' or searchContent.orderByType='asc')">#{searchContent.orderByType}</if>
+            <when test="searchContent.orderBy!=null and searchContent.orderBy!=''">
+                order by #{searchContent.orderBy}
+                <if test="searchContent.orderByType!=null and searchContent.orderByType!='' and (searchContent.orderByType='desc' or searchContent.orderByType='asc')">
+                    #{searchContent.orderByType}
+                </if>
             </when>
             <otherwise>
                 order by create_time desc
@@ -168,7 +174,7 @@
         </where>
     </select>
 
-    <insert id="insert" parameterType="com.note.fiction.entity.FictionBaseEntity" >
+    <insert id="insert" parameterType="com.note.fiction.entity.FictionBaseEntity">
         insert into fiction_base(
         logic_code,title,short_desc,fiction_status,cover_photo,author_name,
         type_code,type_name,create_time,create_user_code,modify_time,modify_user_code,is_delete
@@ -177,6 +183,10 @@
         ,#{typeName},#{createTime},#{createUserCode},#{modifyTime},#{modifyUserCode},#{isDelete}
         )
     </insert>
+
+    <delete id="deleteByLogicCode" parameterType="java.lang.String">
+        delete from fiction_base where logic_code=#{fictionCode};
+    </delete>
 
 
 </mapper>

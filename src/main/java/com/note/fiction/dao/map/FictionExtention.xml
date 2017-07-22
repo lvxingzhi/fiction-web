@@ -109,4 +109,9 @@
     from fiction_extention
   </select>
 
+  <delete id="deleteByFictionCode" parameterType="java.lang.String">
+    delete from fiction_extention where fiction_code=#{fictionCode};
+  </delete>
+
+
 </mapper>

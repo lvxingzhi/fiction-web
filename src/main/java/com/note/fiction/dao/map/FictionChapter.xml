@@ -133,4 +133,8 @@
         </where>
     </select>
 
+    <delete id="deleteByFictionCode" parameterType="java.lang.String">
+        delete from fiction_chapter where fiction_code=#{fictionCode};
+    </delete>
+
 </mapper>
