@@ -5,6 +5,7 @@ import com.note.base.dto.file.ChapterDto;
 import com.note.base.dto.file.FileParseDto;
 
 import java.io.BufferedReader;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
@@ -207,6 +208,11 @@ public class FileParseUtil {
                     if (!isCountMatchChapterTitle(sChild)||!isMatchChapterTitle(sChild)) {
                         chapterContent += ("\n"+sChild);
                     }else{
+                        if(chapterContent.length()<200){
+                            chapterDtoList.remove(chapterDto);
+                            ChapterDto lastChapterDto = chapterDtoList.get(chapterDtoList.size()-1);
+                            lastChapterDto.setContent(lastChapterDto.getContent()+chapterContent);
+                        }
                         i--;
                         break;
                     }
@@ -225,10 +231,10 @@ public class FileParseUtil {
 
     public static boolean isMatchChapterTitle(String s){
         String content = s.trim();
-        if(content.matches("^第[\\s\\S]{1,6}章[\\s\\S]*$")){
+        if(content.matches("^[\\s\\S]{0,30}第[\\s\\S]{1,6}章[\\s\\S]*$")){
             return true;
         }
-        if(content.matches("^第[\\s\\S]{1,6}节[\\s\\S]*$")){
+        if(content.matches("^[\\s\\S]{0,30}第[\\s\\S]{1,6}节[\\s\\S]*$")){
             return true;
         }
         if(content.matches("^☆[\\s\\S]*")){
@@ -262,6 +268,30 @@ public class FileParseUtil {
     public static void main(String[] args) {
         boolean b = "第一百零三章".matches("^第.*章$");
         System.out.println( b);
+    }
+
+    public static String judgeTxtCode(String path) throws Exception {
+        FileInputStream fis = null;
+        String code = "GBK";
+        try {
+            fis = new FileInputStream(path);
+            int a = fis.read();
+            int b = fis.read();
+            if (a == 0xFF && b == 0xFE) {
+                code="Unicode";
+            } else if (a == 0xFE && b == 0xFF) {
+                code="UTF-16BE";
+            } else if (a == 0xEF && b == 0xBB) {
+                code="UTF-8";
+            } else {
+                code="GBK";
+            }
+        } finally {
+            if (fis != null) {
+                fis.close();
+            }
+        }
+        return code;
     }
 
 }

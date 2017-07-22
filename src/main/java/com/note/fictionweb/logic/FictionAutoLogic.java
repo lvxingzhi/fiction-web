@@ -45,7 +45,7 @@ public class FictionAutoLogic {
             FileParseDto fileParseDto = new FileParseDto();
             fileParseDto.setPath("H:/temp/");
             fileParseDto.setFileName(fileName);
-            fileParseDto.setEncode("UTF-8");
+            fileParseDto.setEncode(FileParseUtil.judgeTxtCode(fileParseDto.getPath()+fileParseDto.getFileName()));
             logger.info("#########解析小说: " + fileParseDto.toString());
 
             Map<String, Object> resultMap = FileParseUtil.accessAuto(fileParseDto);
